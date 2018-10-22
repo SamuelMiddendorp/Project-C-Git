@@ -27,6 +27,8 @@ namespace TheRichLifeProject
                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
                        options =>
                        {
+                           options.LoginPath = new PathString("/Login/Index");
+                           options.AccessDeniedPath = new PathString("/Login/AccesDenied");
                        });
             services.AddDistributedMemoryCache();
             services.AddOptions();

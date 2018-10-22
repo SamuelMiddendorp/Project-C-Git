@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheRichLifeProject.Models;
 
@@ -13,17 +14,18 @@ namespace TheRichLifeProject.Controllers
     {
         public IActionResult Index()
         {
-            try
+            // Check if a user is logged in or not
+            if (User.Claims.Any())
             {
-                ViewBag.Role = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value;
+                ViewBag.Role = User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
             }
-            catch
+            else
             {
                 ViewBag.Role = "You are not logged in";
             }
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

@@ -27,7 +27,7 @@ namespace TheRichLifeProject.Controllers
                 Password = "123",
                 Role = "Admin",
                 Adress = "TestAdress 12",
-                DateRegistered = DateTime.Now                            
+                DateRegistered = DateTime.Now
             };
             _context.Add(Test);
             _context.SaveChanges();
@@ -45,8 +45,6 @@ namespace TheRichLifeProject.Controllers
             {
                 ViewBag.Allowance = "You are already logged in";
             }
-            else
-            {
                 // Gebruik linq om de user te krijgen
                 User user = _context.Users.FirstOrDefault(u => u.Username == username);
                 // Check het wachtwoord
@@ -66,16 +64,18 @@ namespace TheRichLifeProject.Controllers
                         userPrincipal,
                         new AuthenticationProperties
                         {
-                            ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
-                            IsPersistent = false,
+                            ExpiresUtc = DateTime.UtcNow.AddMinutes(30),
+                            IsPersistent = true,
                             AllowRefresh = false
                         });
                     ViewBag.Allowance = "Logged in !";
                     return RedirectToAction("Index", "Home");
                 }
                 else { ViewBag.Allowance = "username and password do not match"; return View(); }
-            }
-            return View();
+        }
+        public string AccesDenied()
+        {
+            return "Nee, je mag er niet in";
         }
         public IActionResult Logout()
         {
