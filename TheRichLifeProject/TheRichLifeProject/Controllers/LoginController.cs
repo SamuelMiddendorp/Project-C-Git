@@ -16,16 +16,16 @@ namespace TheRichLifeProject.Controllers
         public LoginController(DatabaseContext context)
         {
             _context = context;
-            //SetData();
+            // SetData();
         }
         // Een methode om wat testdate toe te voegen
         public void SetData()
         {
             User Test = new User
             {
-                Username = "Test",
+                Username = "Test2",
                 Password = "123",
-                Role = "Admin",
+                Role = "User",
                 Adress = "TestAdress 12",
                 DateRegistered = DateTime.Now
             };
@@ -73,9 +73,9 @@ namespace TheRichLifeProject.Controllers
                 }
                 else { ViewBag.Allowance = "username and password do not match"; return View(); }
         }
-        public string AccesDenied()
+        public IActionResult Denied()
         {
-            return "Nee, je mag er niet in";
+            return View();
         }
         public IActionResult Logout()
         {

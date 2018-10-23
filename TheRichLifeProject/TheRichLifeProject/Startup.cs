@@ -28,7 +28,7 @@ namespace TheRichLifeProject
                        options =>
                        {
                            options.LoginPath = new PathString("/Login/Index");
-                           options.AccessDeniedPath = new PathString("/Login/AccesDenied");
+                           options.AccessDeniedPath = new PathString("/Login/Denied");
                        });
             services.AddDistributedMemoryCache();
             services.AddOptions();
