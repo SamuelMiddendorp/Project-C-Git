@@ -16,3 +16,4 @@ namespace TheRichLifeProject.Models
         public DbSet<Order> Orders { get; set; }
     }
 }
+//Welp, as you can see branching works :D
