@@ -23,6 +23,15 @@ namespace TheRichLifeProject.Controllers
             {
                 ViewBag.Role = "You are not logged in";
             }
+            try
+            {
+                var user2 = HttpContext.Session.GetObjectFromJson<User>("Cart");
+                ViewBag.User = user2.Username;
+            }
+            catch
+            {
+                ViewBag.User = "No user";
+            }
             return View();
         }
         [Authorize(Roles = "Admin")]

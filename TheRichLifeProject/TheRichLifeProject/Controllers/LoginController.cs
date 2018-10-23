@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using TheRichLifeProject.Models;
 
 namespace TheRichLifeProject.Controllers
@@ -31,9 +32,19 @@ namespace TheRichLifeProject.Controllers
             };
             _context.Add(Test);
             _context.SaveChanges();
+
         }
         public IActionResult Index()
         {
+            User Test = new User
+            {
+                Username = "Test2",
+                Password = "123",
+                Role = "User",
+                Adress = "TestAdress 12",
+                DateRegistered = DateTime.Now
+            };
+            HttpContext.Session.SetObjectAsJson("Cart", Test);
             return View();
         }
         // Deze methode get de gegevens van de form en checkt dan of er een record in de database zit met de ingevulde gebruikersnaam en password
