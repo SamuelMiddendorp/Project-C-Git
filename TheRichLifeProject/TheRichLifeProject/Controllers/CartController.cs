@@ -12,5 +12,13 @@ namespace TheRichLifeProject.Controllers
         {
             return View();
         }
+        public IActionResult Add()
+        {
+            return View();
+        }
+        public IActionResult Buy()
+        {
+            return View();
+        }
     }
 }
