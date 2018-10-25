@@ -17,20 +17,17 @@ namespace TheRichLifeProject.Controllers
         public LoginController(DatabaseContext context)
         {
             _context = context;
-            // SetData();
+             //SetData();
         }
         // Een methode om wat testdate toe te voegen
         public void SetData()
         {
-            User Test = new User
+            Product Product = new Product
             {
-                Username = "Test2",
-                Password = "123",
-                Role = "User",
-                Adress = "TestAdress 12",
-                DateRegistered = DateTime.Now
+                ProductName = "Phone",
+                Description = "A small phone"                              
             };
-            _context.Add(Test);
+            _context.Add(Product);
             _context.SaveChanges();
 
         }

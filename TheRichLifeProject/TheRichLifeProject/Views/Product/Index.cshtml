@@ -1,0 +1,29 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
+<style>
+	.product {
+		background-color: #ff0000;
+	}
+</style>
+<form asp-controller="Product" asp-action="Index">
+	<p>
+		Title: <input type="text" name="SearchValue">
+		<input type="submit" value="Filter" />
+	</p>
+</form>
+@{
+	foreach (var item in Model)
+	{
+		<div class="product">
+			<h2>@item.ProductName</h2>
+			<h3>@item.Description</h3>
+			<hr />
+		</div>
+	}
+}
+
