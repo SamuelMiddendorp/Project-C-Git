@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRichLifeProject.Models;
 
 namespace TheRichLifeProject.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181025180612_ProductModelChange")]
+    partial class ProductModelChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,22 +123,6 @@ namespace TheRichLifeProject.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("TheRichLifeProject.Models.WishListItem", b =>
-                {
-                    b.Property<int>("WishListItemId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ProductId");
-
-                    b.Property<string>("WishListId");
-
-                    b.HasKey("WishListItemId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("WishListItems");
-                });
-
             modelBuilder.Entity("TheRichLifeProject.Models.Order", b =>
                 {
                     b.HasOne("TheRichLifeProject.Models.User", "User")
@@ -159,13 +145,6 @@ namespace TheRichLifeProject.Migrations
 
                     b.HasOne("TheRichLifeProject.Models.Product", "Product")
                         .WithMany("Values")
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("TheRichLifeProject.Models.WishListItem", b =>
-                {
-                    b.HasOne("TheRichLifeProject.Models.Product", "Product")
-                        .WithMany()
                         .HasForeignKey("ProductId");
                 });
 #pragma warning restore 612, 618

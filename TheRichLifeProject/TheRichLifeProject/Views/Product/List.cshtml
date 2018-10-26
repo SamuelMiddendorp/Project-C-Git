@@ -1,0 +1,46 @@
+﻿@using TheRichLifeProject.ViewModels;
+@model ProductListViewModel
+
+<div>   
+    <h2> All products </h2>
+</div>
+
+<form asp-controller="Product" asp-action="List">
+    <p>
+        Title: <input type="text" name="SearchValue">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+@{ 
+    foreach (var product in Model.Products)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@product.ImageSrc" alt="" />
+                <div class="caption">
+                    <h3 class="pull-right">@product.Price.ToString("c")</h3>
+                    <h3>
+                        <a>@product.ProductName</a>
+                    </h3>
+                    <p>@product.Description</p>
+
+                </div>
+                <div class="AddToWishList text-right">
+                    <p class="button">
+                        <a class="btn btn-success" id="listButton"
+                           asp-controller="WishList"
+                           asp-action="AddToWishList"
+                           asp-route-productId="@product.Id">
+                            Save product
+                        </a>
+
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+}

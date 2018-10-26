@@ -14,6 +14,7 @@ namespace TheRichLifeProject.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Value> Values { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<WishListItem> WishListItems { get; set; }
     }
 }
 //Welp, as you can see branching works :D

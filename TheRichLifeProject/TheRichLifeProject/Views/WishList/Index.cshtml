@@ -1,0 +1,29 @@
+﻿@model WishListViewModel
+
+<div class="row checkoutForm">
+    <h2>Your wishlist</h2>
+    <h4>Here are the products in your wishlist.</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th class="text-right">Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.WishList.WishListItems)
+            {
+                <tr>
+                    <td class="text-left">@line.Product.ProductName</td>
+                    <td class="text-right">@line.Product.Price.ToString("c")</td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="WishList" asp-action="RemoveFromWishList" asp-route-productId="@line.Product.Id"></a></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr></tr>
+        </tfoot>
+    </table>
+</div>
+
