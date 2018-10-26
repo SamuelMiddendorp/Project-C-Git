@@ -31,3 +31,14 @@ C:\Users\Jimmy\Source\Repos\Project-C-Git\TheRichLifeProject\TheRichLifeProject\
 C:\Users\Jimmy\Source\Repos\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs
 C:\Users\Jimmy\Source\Repos\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.dll
 C:\Users\Jimmy\Source\Repos\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.dll
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.deps.json
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.json
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.dev.json
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.dll
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csprojAssemblyReference.cache
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csproj.CoreCompileInputs.cache
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfoInputs.cache
+C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs

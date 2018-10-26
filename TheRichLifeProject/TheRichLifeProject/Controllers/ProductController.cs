@@ -26,6 +26,13 @@ namespace TheRichLifeProject.Controllers
             return View(products);
         }
 
+        //Voor de search
+        [HttpPost]
+        public string Index(string searchvalue, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchvalue;
+        }
+
         
         //private readonly IProductRepository _productRepository;
 
