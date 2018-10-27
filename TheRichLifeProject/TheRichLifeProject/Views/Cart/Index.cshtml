@@ -1,0 +1,19 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@{
+	foreach (var item in Model)
+	{
+		<h2>Naam: @item.Product.ProductName</h2>
+		<h2>Hoeveelheid: @item.Quantity</h2>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Delete"
+		   asp-route-productId="@item.Product.Id">
+			Delete
+			</a>
+			<hr />
+		}
+	}

@@ -50,6 +50,12 @@
 						   asp-route-productId="@item.Id">
 							Order Product
 						</a>
+						<a class="btn btn-success" id="listButton"
+						   asp-controller="Cart"
+						   asp-action="Add"
+						   asp-route-productId="@item.Id">
+							Add to cart
+						</a>
 
 					</p>
 

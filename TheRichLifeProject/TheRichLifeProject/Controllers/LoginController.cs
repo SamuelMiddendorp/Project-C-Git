@@ -41,7 +41,7 @@ namespace TheRichLifeProject.Controllers
                 Adress = "TestAdress 12",
                 DateRegistered = DateTime.Now
             };
-            HttpContext.Session.SetObjectAsJson("Cart", Test);
+            //HttpContext.Session.SetObjectAsJson("Cart", Test);
             return View();
         }
         // Deze methode get de gegevens van de form en checkt dan of er een record in de database zit met de ingevulde gebruikersnaam en password
@@ -84,6 +84,7 @@ namespace TheRichLifeProject.Controllers
         public IActionResult Denied()
         {
             return View();
+
         }
         public IActionResult Logout()
         {
