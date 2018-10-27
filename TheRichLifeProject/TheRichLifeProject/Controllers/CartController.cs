@@ -42,12 +42,8 @@ namespace TheRichLifeProject.Controllers
         {
             var cart = GetCart();
             var cartItem = cart.Single(x => x.ProductId == productId);
-            cartItem.Quantity--;
-        
-            if(cartItem.Quantity <= 0)
-            {
                 cart.Remove(cartItem);
-            }
+            
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             return RedirectToAction("Index");
         }
@@ -67,6 +63,26 @@ namespace TheRichLifeProject.Controllers
                 Cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart");
             }
             return Cart;
+        }
+        public IActionResult Plus(int productId)
+        {
+            var cart = GetCart();
+            var cartItem = cart.Single(x => x.ProductId == productId);
+            cartItem.Quantity++;
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Min(int productId)
+        {
+            var cart = GetCart();
+            var cartItem = cart.Single(x => x.ProductId == productId);
+            cartItem.Quantity--;
+            if(cartItem.Quantity <= 0)
+            {
+                cart.Remove(cartItem);
+            }
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToAction("Index");
         }
         public IActionResult Buy()
         {

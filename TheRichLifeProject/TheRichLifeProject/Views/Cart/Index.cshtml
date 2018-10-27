@@ -13,7 +13,19 @@
 		   asp-action="Delete"
 		   asp-route-productId="@item.Product.Id">
 			Delete
-			</a>
-			<hr />
-		}
+		</a>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Plus"
+		   asp-route-productId="@item.Product.Id">
+			+
+		</a>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Min"
+		   asp-route-productId="@item.Product.Id">
+			-
+		</a>
+		<hr />
 	}
+}
