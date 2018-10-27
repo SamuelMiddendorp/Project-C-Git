@@ -14,5 +14,6 @@ namespace TheRichLifeProject.Models
         public string ImageSrc { get; set; }
         public decimal Price { get; set; }
         public List<Value> Values { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

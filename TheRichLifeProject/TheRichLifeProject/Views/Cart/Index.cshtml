@@ -2,12 +2,16 @@
 	ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Your cart below</h2>
+<hr/>
 @{
 	foreach (var item in Model)
 	{
-		<h2>Naam: @item.Product.ProductName</h2>
-		<h2>Hoeveelheid: @item.Quantity</h2>
+
+<b>Naam: </b>@item.Product.ProductName
+		<br/>
+		<b>Hoeveelheid: </b>@item.Quantity
+		<br/>
 		<a class="btn btn-success" id="listButton"
 		   asp-controller="Cart"
 		   asp-action="Delete"

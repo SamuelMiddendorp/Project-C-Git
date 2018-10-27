@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheRichLifeProject.Models;
+using System.Security.Claims;
 namespace TheRichLifeProject.Controllers
 {
     public class CartController : Controller
@@ -84,9 +86,38 @@ namespace TheRichLifeProject.Controllers
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             return RedirectToAction("Index");
         }
+        [Authorize]
         public IActionResult Buy()
         {
-            return View();
+            var cart = GetCart();
+            string userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            User CurrentUser = _context.Users.Find(Int32.Parse(userId));
+            decimal CartTotal = 0;
+            foreach (var item in cart)
+            {
+                CartTotal += (item.Product.Price * item.Quantity);
+            }
+            Order newOrder = new Order
+            {
+                User = CurrentUser,
+                OrderPrice = CartTotal
+            };
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
+            foreach (var item in cart)
+            {
+                Product product = _context.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                _context.Add(new OrderDetail
+                {
+                    Order = newOrder,
+                    Quantity = item.Quantity,
+                    Product = product,
+                    SubTotal = product.Price * item.Quantity
+                });
+            }
+            _context.Add(newOrder);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
