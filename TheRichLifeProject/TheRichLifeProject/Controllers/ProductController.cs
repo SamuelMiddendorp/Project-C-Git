@@ -24,7 +24,8 @@ namespace TheRichLifeProject.Controllers
             var products = from p in _context.Products select p;
             if (!string.IsNullOrEmpty(searchvalue))
             {
-                products = products.Where(x => x.ProductName.Contains(searchvalue)); 
+                products = products.Where(x => x.ProductName.Contains(searchvalue)
+                                        || x.ShortDescription.Contains(searchvalue));                   
             }
             return View(products);
         }
