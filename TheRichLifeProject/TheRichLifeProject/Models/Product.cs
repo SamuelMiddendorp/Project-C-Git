@@ -9,10 +9,15 @@ namespace TheRichLifeProject.Models
     public class Product
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string ShortDescription { get; set; }
+        public string LongDescription { get; set; }
         public string ProductName { get; set; }
         public string ImageSrc { get; set; }
         public decimal Price { get; set; }
+        public int Stock { get; set; }
+        public bool Mature{ get; set; }
+        public string Category { get; set; }
         public List<Value> Values { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

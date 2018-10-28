@@ -22,12 +22,23 @@ namespace TheRichLifeProject.Controllers
         // Een methode om wat testdate toe te voegen
         public void SetData()
         {
+            User User = new User
+            {
+                DateRegistered = DateTime.Now,
+                Adress = "Azaleastraat 15",
+                Username = "Test",
+                Password = "12345",
+                Role = "User"
+            };
+
             Product Product = new Product
             {
-                ProductName = "Phone",
-                Description = "A small phone"                              
+                ProductName = "Laptop2",
+                ShortDescription = "A small Laptop for some heavy work",
+                Price = (decimal)19.99
             };
             _context.Add(Product);
+            //_context.Add(User);
             _context.SaveChanges();
 
         }
@@ -41,7 +52,7 @@ namespace TheRichLifeProject.Controllers
                 Adress = "TestAdress 12",
                 DateRegistered = DateTime.Now
             };
-            HttpContext.Session.SetObjectAsJson("Cart", Test);
+            //HttpContext.Session.SetObjectAsJson("Cart", Test);
             return View();
         }
         // Deze methode get de gegevens van de form en checkt dan of er een record in de database zit met de ingevulde gebruikersnaam en password
@@ -84,6 +95,7 @@ namespace TheRichLifeProject.Controllers
         public IActionResult Denied()
         {
             return View();
+
         }
         public IActionResult Logout()
         {

@@ -42,3 +42,14 @@ C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\T
 C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csproj.CoreCompileInputs.cache
 C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfoInputs.cache
 C:\Users\School\Source\Repos\SamuelMiddendorp\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.deps.json
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.json
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.dev.json
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.dll
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csprojAssemblyReference.cache
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csproj.CoreCompileInputs.cache
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfoInputs.cache
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.dll
+D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.pdb

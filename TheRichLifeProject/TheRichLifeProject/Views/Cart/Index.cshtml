@@ -1,0 +1,39 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+<h2>Your cart below</h2>
+<hr/>
+@{
+	foreach (var item in Model)
+	{
+
+<b>Naam: </b>@item.Product.ProductName
+		<br/>
+		<b>Hoeveelheid: </b>@item.Quantity
+		<br/>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Delete"
+		   asp-route-productId="@item.Product.Id">
+			Delete
+		</a>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Plus"
+		   asp-route-productId="@item.Product.Id">
+			+
+		</a>
+		<a class="btn btn-success" id="listButton"
+		   asp-controller="Cart"
+		   asp-action="Min"
+		   asp-route-productId="@item.Product.Id">
+			-
+		</a>
+		<hr />
+	}
+}
+<a class="btn btn-danger" id="ListButton"
+   asp-controller="Cart"
+	asp-action="Buy"
+>Buy these products !</a>

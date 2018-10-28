@@ -1,0 +1,18 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h2>Your orders</h2>
+@{
+	foreach (var item in Model)
+	{
+		<h3>OrderId: @item.Id, OrderPrice: @item.OrderPrice</h3>
+		foreach (var item2 in item.OrderDetails)
+		{
+			<h4>Product: @item2.Product.ProductName</h4>
+			<h4>Item Quantity: @item2.Quantity</h4>
+			<h4>Item SubTotal: @item2.SubTotal</h4>
+			<hr />
+		}
+	}
+
+}
