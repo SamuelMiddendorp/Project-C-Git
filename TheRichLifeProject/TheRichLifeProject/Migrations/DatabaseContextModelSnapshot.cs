@@ -75,13 +75,21 @@ namespace TheRichLifeProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Category");
 
                     b.Property<string>("ImageSrc");
+
+                    b.Property<string>("LongDescription");
+
+                    b.Property<bool>("Mature");
 
                     b.Property<decimal>("Price");
 
                     b.Property<string>("ProductName");
+
+                    b.Property<string>("ShortDescription");
+
+                    b.Property<int>("Stock");
 
                     b.HasKey("Id");
 

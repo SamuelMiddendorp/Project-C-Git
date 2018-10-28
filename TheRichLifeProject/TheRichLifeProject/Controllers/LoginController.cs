@@ -34,7 +34,7 @@ namespace TheRichLifeProject.Controllers
             Product Product = new Product
             {
                 ProductName = "Laptop2",
-                Description = "A small Laptop for some heavy work",
+                ShortDescription = "A small Laptop for some heavy work",
                 Price = (decimal)19.99
             };
             _context.Add(Product);

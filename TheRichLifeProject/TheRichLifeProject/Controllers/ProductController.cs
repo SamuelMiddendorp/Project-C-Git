@@ -12,9 +12,12 @@ namespace TheRichLifeProject.Controllers
     public class ProductController : Controller
     {
         private readonly DatabaseContext _context;
-        public ProductController(DatabaseContext context)
+        private readonly IProductRepository _productRepository;
+
+        public ProductController(DatabaseContext context, IProductRepository productRepository)
         {
             _context = context;
+            _productRepository = productRepository;
         }
         public IActionResult index(string searchvalue)
         {
@@ -33,23 +36,27 @@ namespace TheRichLifeProject.Controllers
             return "From [HttpPost]Index: filter on " + searchvalue;
         }
 
-        
-        //private readonly IProductRepository _productRepository;
 
+        public IActionResult Detail(int id)
+        {
+            var product = _productRepository.GetProductById(id);
 
-        //public ProductController(IProductRepository productRepository)
-        //{
-            
-        //    _productRepository = productRepository;
-        //}
+            var model = new Product
+            {
+                Id = id,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                ImageSrc = product.ImageSrc,
+                ShortDescription = product.ShortDescription,
+                LongDescription = product.LongDescription,
+                Mature = product.Mature,
+                Stock = product.Stock
 
-        //public ViewResult List()
-        //{
-        //    ProductListViewModel vm = new ProductListViewModel();
-        //    vm.Products = _productRepository.Products;
-        //    return View(vm);
-        //}
-        
+            };
+
+            return View(model);
+        }
+
 
     }
 }

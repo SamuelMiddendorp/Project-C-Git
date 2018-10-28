@@ -21,45 +21,49 @@
 	{
 		<div class="col-sm-4 col-lg-4 col-md-4">
 			<div class="thumbnail">
-				<img src="@item.ImageSrc" alt="" />
+				<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
+					<img src="@item.ImageSrc" alt="" />
+				</a>
 				<div class="caption">
 					<h3 class="pull-right">@item.Price.ToString("c")</h3>
-					<h3>
-						<a>@item.ProductName</a>
-					</h3>
-					<p>@item.Description</p>
+					
+						<h3>
+							<a><a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">@item.ProductName</a></a>
+						</h3>
+					
+						<p>@item.ShortDescription</p>
 
 				</div>
-				<div class="AddToWishList text-left">
-					<p class="button">
-						<a class="btn btn-success" id="listButton"
-						   asp-controller="WishList"
-						   asp-action="AddToWishList"
-						   asp-route-productId="@item.Id">
-							Save product
-						</a>
+					<div class="AddToWishList text-left">
+						<p class="button">
+							<a class="btn btn-success" id="listButton"
+							   asp-controller="WishList"
+							   asp-action="AddToWishList"
+							   asp-route-productId="@item.Id">
+								Save product
+							</a>
 
-					</p>
+						</p>
 
-				</div>
-				<div class="OrderItem text-right">
-					<p class="button">
-						<a class="btn btn-success" id="listButton"
-						   asp-controller="Order"
-						   asp-action="OrderItem"
-						   asp-route-productId="@item.Id">
-							Order Product
-						</a>
-						<a class="btn btn-success" id="listButton"
-						   asp-controller="Cart"
-						   asp-action="Add"
-						   asp-route-productId="@item.Id">
-							Add to cart
-						</a>
+					</div>
+					<div class="OrderItem text-right">
+						<p class="button">
+							<a class="btn btn-success" id="listButton"
+							   asp-controller="Order"
+							   asp-action="OrderItem"
+							   asp-route-productId="@item.Id">
+								Order Product
+							</a>
+							<a class="btn btn-success" id="listButton"
+							   asp-controller="Cart"
+							   asp-action="Add"
+							   asp-route-productId="@item.Id">
+								Add to cart
+							</a>
 
-					</p>
+						</p>
 
-				</div>
+					</div>
 			</div>
 
 		</div>

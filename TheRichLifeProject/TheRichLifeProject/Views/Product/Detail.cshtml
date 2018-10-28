@@ -1,0 +1,47 @@
+﻿@using TheRichLifeProject.Models
+@model TheRichLifeProject.Models.Product
+@{
+    ViewBag.Title = @Model.ProductName;
+}
+
+<div class="col-md-4">
+    <img src="@Model.ImageSrc" alt="" />
+    <p>@Model.ProductName</p>
+    <p>Price: @Model.Price.ToString("c")</p>
+    <p>@Model.ShortDescription</p>
+    <p>@Model.LongDescription</p>
+    <p>Mature product: @Model.Mature</p>
+    <p>In Stock: @Model.Stock</p>
+    <div class="AddToWishList text-left">
+        <p class="button">
+            <a class="btn btn-success" id="listButton"
+               asp-controller="WishList"
+               asp-action="AddToWishList"
+               asp-route-productId="@Model.Id">
+                Save product
+            </a>
+
+        </p>
+
+    </div>
+    <div class="OrderItem text-right">
+        <p class="button">
+            <a class="btn btn-success" id="listButton"
+               asp-controller="Order"
+               asp-action="OrderItem"
+               asp-route-productId="@Model.Id">
+                Order Product
+            </a>
+            <a class="btn btn-success" id="listButton"
+               asp-controller="Cart"
+               asp-action="Add"
+               asp-route-productId="@Model.Id">
+                Add to cart
+            </a>
+
+        </p>
+
+    </div>
+
+
+</div>
