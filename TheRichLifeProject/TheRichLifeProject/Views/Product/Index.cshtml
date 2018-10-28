@@ -1,72 +1,143 @@
 ﻿
 @{
-	ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
 @* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
 <style>
-	.product {
-		background-color: #ff0000;
-	}
+    .product {
+        background-color: #ff0000;
+    }
 </style>
 <form asp-controller="Product" asp-action="Index" method="get">
-	<p>
-		Title: <input type="text" name="SearchValue">
-		<input type="submit" value="Filter" />
-	</p>
+    <p>
+        Title: <input type="text" name="SearchValue">
+        <input type="submit" value="Filter" />
+    </p>
 </form>
 @{
-	foreach (var item in Model)
-	{
-		<div class="col-sm-4 col-lg-4 col-md-4">
-			<div class="thumbnail">
-				<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
-					<img src="@item.ImageSrc" alt="" />
-				</a>
-				<div class="caption">
-					<h3 class="pull-right">@item.Price.ToString("c")</h3>
-					
-						<h3>
-							<a><a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">@item.ProductName</a></a>
-						</h3>
-					
-						<p>@item.ShortDescription</p>
+    /*foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
+                    <img src="@item.ImageSrc" alt="" />
+                </a>
+                <div class="caption">
+                    <h3 class="pull-right">@item.Price.ToString("c")</h3>
 
-				</div>
-					<div class="AddToWishList text-left">
-						<p class="button">
-							<a class="btn btn-success" id="listButton"
-							   asp-controller="WishList"
-							   asp-action="AddToWishList"
-							   asp-route-productId="@item.Id">
-								Save product
-							</a>
+                        <h3>
+                            <a><a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">@item.ProductName</a></a>
+                        </h3>
 
-						</p>
+                        <p>@item.ShortDescription</p>
 
-					</div>
-					<div class="OrderItem text-right">
-						<p class="button">
-							<a class="btn btn-success" id="listButton"
-							   asp-controller="Order"
-							   asp-action="OrderItem"
-							   asp-route-productId="@item.Id">
-								Order Product
-							</a>
-							<a class="btn btn-success" id="listButton"
-							   asp-controller="Cart"
-							   asp-action="Add"
-							   asp-route-productId="@item.Id">
-								Add to cart
-							</a>
+                </div>
+                    <div class="AddToWishList text-left">
+                        <p class="button">
+                            <a class="btn btn-success" id="listButton"
+                               asp-controller="WishList"
+                               asp-action="AddToWishList"
+                               asp-route-productId="@item.Id">
+                                Save product
+                            </a>
 
-						</p>
+                        </p>
 
-					</div>
-			</div>
+                    </div>
+                    <div class="OrderItem text-right">
+                        <p class="button">
+                            <a class="btn btn-success" id="listButton"
+                               asp-controller="Order"
+                               asp-action="OrderItem"
+                               asp-route-productId="@item.Id">
+                                Order Product
+                            </a>
+                            <a class="btn btn-success" id="listButton"
+                               asp-controller="Cart"
+                               asp-action="Add"
+                               asp-route-productId="@item.Id">
+                                Add to cart
+                            </a>
 
-		</div>
-	}
+                        </p>
+
+                    </div>
+            </div>
+
+        </div>
+    }*/
+
+    foreach (var product in Model)
+    {
+        <div class="row col-lg-offset-3">
+            <div class="row">
+                <div class="thumbnail">
+                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">
+                        <img src="@product.ImageSrc" alt="" />
+                    </a>
+                    <div class="caption">
+                        <h3 class="pull-right">@product.Price.ToString("c")</h3>
+                        <div class="col-lg-1">
+                            <h3>
+                                <a><a asp-controller="Product" asp-action="Detail" asp-route-id="@product.Id">@product.ProductName</a></a>
+                            </h3>
+                        </div>
+                        <div class="row"></div>
+                        <div class="col-lg-3 col-lg-offset-5">
+                            <br />
+                            <div>@product.ProductName</div>
+                            <br />
+                            <div>ID: @product.Id</div>
+                            <br />
+                            <div>Stock: @product.Stock left!</div>
+                            <br />
+                            <div>Category: @product.Category</div>
+                            <br />
+                            <div>@product.ShortDescription</div>
+                        </div>
+                    </div>
+                    <h3>
+                        <a asp-controller="Product"
+                           asp-action="Detail"
+                           asp-route-id="@product.Id">
+                        </a>
+                    </h3>
+                    <div class="col-md-auto">
+                        <div class="row"></div>
+                        <div class="AddToWishList pull-right">
+                            <p class="button">
+                                <a class="btn btn-success" id="listButton"
+                                   asp-controller="WishList"
+                                   asp-action="AddToWishList"
+                                   asp-route-productId="@product.Id">
+                                    Save product
+                                </a>
+                            </p>
+                        </div>
+                        <div class="row"></div>
+                        <div class="OrderItem text-right">
+                            <p class="button">
+                                <a class="btn btn-success" id="listButton"
+                                   asp-controller="Order"
+                                   asp-action="OrderItem"
+                                   asp-route-productId="@product.Id">
+                                    Order Product
+                                </a>
+                                <div class="row"></div>
+                                <a class="btn btn-success" id="listButton"
+                                   asp-controller="Cart"
+                                   asp-action="Add"
+                                   asp-route-productId="@product.Id">
+                                    Add to cart
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 }
 

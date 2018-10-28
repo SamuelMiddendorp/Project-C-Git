@@ -53,3 +53,14 @@ D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeP
 D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs
 D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.dll
 D:\Documenten\School\Jaar 2\periode 1\project\Project\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.deps.json
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.json
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.runtimeconfig.dev.json
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.dll
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\bin\Debug\netcoreapp2.0\TheRichLifeProject.pdb
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csprojAssemblyReference.cache
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.csproj.CoreCompileInputs.cache
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfoInputs.cache
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.AssemblyInfo.cs
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.dll
+C:\Users\pauli\OneDrive\Documenten\GitHub\Project-C-Git\TheRichLifeProject\TheRichLifeProject\obj\Debug\netcoreapp2.0\TheRichLifeProject.pdb
