@@ -117,7 +117,7 @@ namespace TheRichLifeProject.Controllers
             _context.Add(newOrder);
             _context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return View("AddSucces");
         }
     }
 }
