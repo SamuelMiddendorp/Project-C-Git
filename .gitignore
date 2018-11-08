@@ -1,0 +1,9 @@
+
+*.ide-wal
+TheRichLifeProject/.vs/TheRichLifeProject/v15/Server/sqlite3/storage.ide-shm
+TheRichLifeProject/.vs/TheRichLifeProject/v15/Server/sqlite3/storage.ide-wal
+TheRichLifeProject/TheRichLifeProject/obj/Debug/netcoreapp2.0/TheRichLifeProject.assets.cache
+*.ide-shm
+*.ide-wal
+*.cache
+*.ide
