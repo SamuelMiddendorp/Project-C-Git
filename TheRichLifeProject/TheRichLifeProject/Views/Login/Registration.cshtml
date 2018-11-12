@@ -1,0 +1,16 @@
+﻿
+@{
+	ViewData["Title"] = "Registration";
+}
+
+<h2>Registration</h2>
+
+	Please fill in all the required info to create an acount
+<form asp-controller="UserPage" asp-action="Edit" method="post">
+	<label for="username">Username</label>
+	<input id="username" name="username" type="text" />
+	<br/>
+	<br/>
+	<label for="password">Password</label>
+	<input id="password" name="password" type="password" />
+</form>

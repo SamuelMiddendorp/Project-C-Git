@@ -57,6 +57,10 @@ namespace TheRichLifeProject.Controllers
         }
         // Deze methode get de gegevens van de form en checkt dan of er een record in de database zit met de ingevulde gebruikersnaam en password
         // ToDo, er moet nog een hashing helper functie worden geschreven.
+        public IActionResult Registration()
+        {
+            return View();
+        }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Login(string username, string password)
         {
