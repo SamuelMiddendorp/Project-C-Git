@@ -91,6 +91,8 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<int>("Stock");
 
+                    b.Property<string>("SubCategory");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");

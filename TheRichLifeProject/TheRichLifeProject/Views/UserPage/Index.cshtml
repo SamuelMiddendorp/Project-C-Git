@@ -1,0 +1,29 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+}
+<h2>User info</h2>
+<form asp-controller="UserPage" asp-action="Edit" method="post">
+	<table>
+		<tr>
+			<td>
+				<label for="username">Username</label>
+			</td>
+			<td>
+				<input style="margin-left: 10px;" id="username" name="username" type="text" value="@Model.Username" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="adress">Adress</label>
+			</td>
+			<td>
+				<input style="margin-left: 10px;" id="adress" name="adress" type="text" value="@Model.Adress" />
+			</td>
+		</tr>
+	</table>
+	<br />
+	<button type="submit">Gegevens Aanpassen</button>
+
+</form>
+

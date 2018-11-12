@@ -20,7 +20,18 @@ namespace TheRichLifeProject.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            User CurrentUser = _context.Users.Find(Int32.Parse(userId));
+            return View(CurrentUser);
+        }
+        public IActionResult Edit(string username, string adress)
+        {
+            var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            User CurrentUser = _context.Users.Find(Int32.Parse(userId));
+            CurrentUser.Adress = adress;
+            CurrentUser.Username = username;
+            _context.SaveChanges();
+            return RedirectToAction("Index", "UserPage");
         }
         public IActionResult Orders()
         {
