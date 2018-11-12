@@ -29,10 +29,55 @@ namespace TheRichLifeProject.Controllers
             }
             return View(products);
         }
+        public IActionResult Fashion(string searchvalue)
+        {
+            var products = from p in _context.Products where p.Category == "Fashion" select p;
+            if (!string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.ProductName.Contains(searchvalue)
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Fashion"));
+            }
+            return View(products);
+        }
+        public IActionResult Exotic(string searchvalue)
+        {
+            var products = from p in _context.Products where p.Category == "Exotic" select p;
+            if (!string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.ProductName.Contains(searchvalue)
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Exotic"));
+            }
+            return View(products);
+        }
+        public IActionResult Lifestyle(string searchvalue)
+        {
+            var products = from p in _context.Products where p.Category == "Lifestyle" select p;
+            if (!string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.ProductName.Contains(searchvalue)
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Lifestyle"));
+            }
+            return View(products);
+        }
 
         //Voor de search
         [HttpPost]
         public string Index(string searchvalue, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchvalue;
+        }
+        [HttpPost]
+        public string Lifestyle(string searchvalue, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchvalue;
+        }
+        [HttpPost]
+        public string Exotic(string searchvalue, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchvalue;
+        }
+        [HttpPost]
+        public string Fashion(string searchvalue, bool notUsed)
         {
             return "From [HttpPost]Index: filter on " + searchvalue;
         }
