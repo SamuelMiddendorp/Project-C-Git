@@ -17,7 +17,7 @@ namespace TheRichLifeProject.Models
         public int Stock { get; set; }
         public bool Mature{ get; set; }
         public string Category { get; set; }
-        public string SubCatergory { get; set; }
+        public string SubCategory { get; set; }
         public virtual List<Value> Values { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; }
     }
