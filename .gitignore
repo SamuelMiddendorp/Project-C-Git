@@ -7,3 +7,9 @@ TheRichLifeProject/TheRichLifeProject/obj/Debug/netcoreapp2.0/TheRichLifeProject
 *.ide-wal
 *.cache
 *.ide
+/TheRichLifeProject/TheRichLifeProject/Migrations/20181112111849_subCatagory.Designer.cs
+/TheRichLifeProject/TheRichLifeProject/Migrations/20181112111849_subCatagory.cs
+/TheRichLifeProject/TheRichLifeProject/TheRichLifeProject.csproj.user
+/TheRichLifeProject/.vs/VSWorkspaceState.json
+/TheRichLifeProject/.vs/tasks.vs.json
+/TheRichLifeProject/.vs/slnx.sqlite
