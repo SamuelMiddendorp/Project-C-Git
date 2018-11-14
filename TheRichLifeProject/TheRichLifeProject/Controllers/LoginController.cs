@@ -64,14 +64,34 @@ namespace TheRichLifeProject.Controllers
             {
                 ViewBag.emptyfield = "Vul alstublieft alle velden in";
             }
+            else if(HttpContext.Session.GetString("emptyfield") == "2")
+            {
+                ViewBag.emptyfield = "Deze gebruikersnaam komt al voor in onze database";
+            }
             return View();
         }
         public IActionResult Register(string username, string password, string adress)
         {
+            HttpContext.Session.SetString("emptyfield", "0");
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(adress)) { 
                 HttpContext.Session.SetString("emptyfield", "1");
                 return RedirectToAction("Registration");
             }
+            else if(_context.Users.Any(x => x.Username == username)){
+                HttpContext.Session.SetString("emptyfield", "2");
+                return RedirectToAction("Registration");
+            }
+
+            User newuser = new User()
+            {
+                Username = username,
+                Password = password.ComputeSha256Hash(),
+                Adress = adress,
+                Role = "User",
+                DateRegistered = DateTime.Now           
+            };
+            _context.Add(newuser);
+            _context.SaveChanges();
             return View();
         }
         [HttpPost, ValidateAntiForgeryToken]

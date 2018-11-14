@@ -26,7 +26,7 @@ namespace TheRichLifeProject
             var value = session.GetString(key);
             return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
-        static string ComputeSha256Hash(string rawData)
+        public static string ComputeSha256Hash(this string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
