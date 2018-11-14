@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TheRichLifeProject.Models;
@@ -59,6 +60,18 @@ namespace TheRichLifeProject.Controllers
         // ToDo, er moet nog een hashing helper functie worden geschreven.
         public IActionResult Registration()
         {
+            if (HttpContext.Session.GetString("emptyfield") == "1")
+            {
+                ViewBag.emptyfield = "Vul alstublieft alle velden in";
+            }
+            return View();
+        }
+        public IActionResult Register(string username, string password, string adress)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(adress)) { 
+                HttpContext.Session.SetString("emptyfield", "1");
+                return RedirectToAction("Registration");
+            }
             return View();
         }
         [HttpPost, ValidateAntiForgeryToken]
