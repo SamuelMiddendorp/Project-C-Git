@@ -9,5 +9,6 @@ namespace TheRichLifeProject.ViewModel
     public class WishListViewModel
     {
         public WishList WishList { get; set; }
+       
     }
 }
