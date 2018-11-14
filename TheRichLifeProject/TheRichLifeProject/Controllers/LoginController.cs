@@ -104,7 +104,7 @@ namespace TheRichLifeProject.Controllers
                 // Gebruik linq om de user te krijgen
                 User user = _context.Users.FirstOrDefault(u => u.Username == username);
                 // Check het wachtwoord
-                if (user != null && user.Password == password)
+                if (user != null && user.Password == password.ComputeSha256Hash())
                 {
                     // Maak de identity van de gebruiker aan
                     var claims = new List<Claim>
