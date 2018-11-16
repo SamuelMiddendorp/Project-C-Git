@@ -5,12 +5,12 @@
 @{
 	foreach (var item in Model)
 	{
-		<h3>OrderId: @item.Id, OrderPrice: @item.OrderPrice</h3>
+		<h3>OrderId: @item.Id, OrderPrice: @decimal.Round(item.OrderPrice, 2)</h3>
 		foreach (var item2 in item.OrderDetails)
 		{
 			<h4>Product: @item2.Product.ProductName</h4>
 			<h4>Item Quantity: @item2.Quantity</h4>
-			<h4>Item SubTotal: @item2.SubTotal</h4>
+			<h4>Item SubTotal: @decimal.Round(item2.SubTotal, 2)</h4>
 			<hr />
 		}
 	}
