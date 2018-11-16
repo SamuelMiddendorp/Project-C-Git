@@ -127,7 +127,7 @@ namespace TheRichLifeProject.Controllers
                     ViewBag.Allowance = "Logged in !";
                     return RedirectToAction("Index", "Home");
                 }
-                else { ViewBag.Allowance = "username and password do not match"; return View(); }
+                else { string alowance = "username and password do not match"; return View("Index", alowance); }
         }
         public IActionResult Denied()
         {
