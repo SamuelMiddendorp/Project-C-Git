@@ -19,6 +19,28 @@
 <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
+
+<form asp-controller="Product" asp-action="Exotic" method="get">
+    <p>
+        <div>
+            Category:
+        </div>
+        @{
+            @* Generates the filter radiobuttons *@
+            foreach (var value in Model.Categories)
+            {
+                <div>
+                    <input type="radio" id="@value" name="subcat" value="@value">
+                    <label for="@value">@value</label>
+                </div>
+            }
+            <div>
+                <input type="submit" value="Filter" />
+            </div>
+        }
+    </p>
+</form>
+
 @{
     /*foreach (var item in Model)
     {
@@ -71,8 +93,8 @@
 
         </div>
     }*/
-
-    foreach (var product in Model)
+    
+    foreach (var product in Model.Products)
     {
         <div class="row col-lg-offset-3">
             <div class="row">
@@ -143,4 +165,5 @@
         </div>
     }
 }
+        
 

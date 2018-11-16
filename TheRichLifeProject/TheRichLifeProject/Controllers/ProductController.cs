@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TheRichLifeProject.interfaces;
 using TheRichLifeProject.Models;
 using TheRichLifeProject.ViewModels;
@@ -29,35 +30,116 @@ namespace TheRichLifeProject.Controllers
             }
             return View(products);
         }
-        public IActionResult Fashion(string searchvalue)
+        public IActionResult Fashion(string subcat, string searchvalue)
         {
+            //Filtering the products
             var products = from p in _context.Products where p.Category == "Fashion" select p;
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
                                         || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Fashion"));
             }
-            return View(products);
+
+            if (!string.IsNullOrEmpty(subcat) && string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.SubCategory == (subcat));
+
+            }
+
+            //Creating the filter buttons
+            CategoryViewModel subprod = new CategoryViewModel();
+            List<string> categories = new List<string>();
+            foreach (var item in _context.Products.Where(x => x.Category == "Fashion"))
+            {
+                if (!categories.Contains(item.SubCategory))
+                {
+                    categories.Add(item.SubCategory);
+                }
+                else
+                {
+
+                }
+            }
+            subprod.Products = products.ToList();
+            subprod.Categories = categories;
+
+            return View(subprod);
         }
-        public IActionResult Exotic(string searchvalue)
+        public IActionResult Exotic(string subcat, string searchvalue)
         {
+            //Filter the products
             var products = from p in _context.Products where p.Category == "Exotic" select p;
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
                                         || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Exotic"));
             }
-            return View(products);
+
+            if (!string.IsNullOrEmpty(subcat) && !string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.SubCategory == (subcat) && 
+                                               (x.ProductName.Contains(searchvalue) || x.ShortDescription.Contains(searchvalue)));
+
+            }
+
+            if (!string.IsNullOrEmpty(subcat))
+            {
+                products = products.Where(x => x.SubCategory == (subcat));
+
+            }
+
+            //Creating the filter buttons
+            CategoryViewModel subprod = new CategoryViewModel();
+            List<string> categories = new List<string>();
+            foreach (var item in _context.Products.Where(x => x.Category == "Exotic"))
+            {
+                if(!categories.Contains(item.SubCategory))
+                {
+                    categories.Add(item.SubCategory);
+                }
+                else
+                {
+
+                }
+            }
+            subprod.Products = products.ToList();
+            subprod.Categories = categories;
+
+            return View(subprod);
         }
-        public IActionResult Lifestyle(string searchvalue)
+        public IActionResult Lifestyle(string subcat, string searchvalue)
         {
+            //Filtering the products
             var products = from p in _context.Products where p.Category == "Lifestyle" select p;
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
                                         || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Lifestyle"));
             }
-            return View(products);
+
+            if (!string.IsNullOrEmpty(subcat) && string.IsNullOrEmpty(searchvalue))
+            {
+                products = products.Where(x => x.SubCategory == (subcat));
+
+            }
+            //Creating the filter buttons
+            CategoryViewModel subprod = new CategoryViewModel();
+            List<string> categories = new List<string>();
+            foreach (var item in _context.Products.Where(x => x.Category == "Lifestyle"))
+            {
+                if (!categories.Contains(item.SubCategory))
+                {
+                    categories.Add(item.SubCategory);
+                }
+                else
+                {
+
+                }
+            }
+            subprod.Products = products.ToList();
+            subprod.Categories = categories;
+
+            return View(subprod);
         }
 
         //Voor de search
