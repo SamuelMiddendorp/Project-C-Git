@@ -125,11 +125,21 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<string>("Adress");
 
+                    b.Property<DateTime>("Birth");
+
                     b.Property<DateTime>("DateRegistered");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("Password");
 
+                    b.Property<int>("PhoneNumber");
+
                     b.Property<string>("Role");
+
+                    b.Property<string>("SurName");
 
                     b.Property<string>("Username");
 

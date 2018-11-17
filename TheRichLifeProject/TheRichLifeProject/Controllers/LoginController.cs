@@ -70,7 +70,7 @@ namespace TheRichLifeProject.Controllers
             }
             return View();
         }
-        public IActionResult Register(string username, string password, string adress)
+        public IActionResult Register(string username, string password, string name, string surname, string email, int phonenumber, DateTime birth, string adress)
         {
             HttpContext.Session.SetString("emptyfield", "0");
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(adress)) { 
@@ -86,6 +86,11 @@ namespace TheRichLifeProject.Controllers
             {
                 Username = username,
                 Password = password.ComputeSha256Hash(),
+                Name = name,
+                SurName = surname,
+                Email = email,
+                PhoneNumber = phonenumber,
+                Birth = birth,
                 Adress = adress,
                 Role = "User",
                 DateRegistered = DateTime.Now           
