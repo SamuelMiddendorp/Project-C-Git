@@ -9,6 +9,16 @@
     .product {
         background-color: #ff0000;
     }
+
+    #catlifestyle {
+        position: absolute;
+        top: 26vh;
+        left: 17vw;
+    }
+
+    li a:hover {
+        color: blue;
+    }
 </style>
 <form asp-controller="Product" asp-action="Lifestyle" method="get">
     <p>
@@ -20,7 +30,7 @@
 <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
 
-<form asp-controller="Product" asp-action="Exotic" method="get">
+<form asp-controller="Product" asp-action="Exotic" method="get" id="catlifestyle">
     <p>
         <div>
             Category:
