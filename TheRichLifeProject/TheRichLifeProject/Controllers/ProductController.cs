@@ -104,5 +104,9 @@ namespace TheRichLifeProject.Controllers
         }
 
 
+        public IActionResult List()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TheRichLifeProject.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRegistered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th>
+                <a asp-action="AddUser" asp-controller="Administrator"><span class="glyphicon glyphicon-plus" style="margin-left:10%"></span></a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRegistered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td>
+                    <a asp-action="EditUserPage" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a asp-action="UserDetails" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
+                    <a asp-action="DeleteUser" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,78 @@
+﻿@model TheRichLifeProject.Models.Product
+
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<h2>ProductDetails</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.ShortDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.ShortDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.LongDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.LongDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.ProductName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.ImageSrc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.ImageSrc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Stock)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Stock)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Mature)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Mature)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.Category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.SubCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.SubCategory)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditProductPage" asp-controller="Administrator">Edit</a>
+    <a asp-action="Products" asp-controller="Admin">Back to List</a>
+</div>

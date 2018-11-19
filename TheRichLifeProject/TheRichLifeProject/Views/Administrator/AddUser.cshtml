@@ -1,0 +1,55 @@
+﻿@model TheRichLifeProject.Models.User
+
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+<h2>AddUserPage</h2>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUserPage">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateRegistered" class="control-label"></label>
+                <input asp-for="DateRegistered" class="form-control" />
+                <span asp-validation-for="DateRegistered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress" class="control-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-action="AddUser" asp-controller="Administrator">
+                <input type="submit" value="Create" class="btn btn-default" />
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Users" asp-controller="Admin">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
