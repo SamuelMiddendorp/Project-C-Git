@@ -24,12 +24,17 @@ namespace TheRichLifeProject.Controllers
             User CurrentUser = _context.Users.Find(Int32.Parse(userId));
             return View(CurrentUser);
         }
-        public IActionResult Edit(string username, string adress)
+        public IActionResult Edit(string username, string adress, string name, string surname, int phonenumber, DateTime birth, string email)
         {
             var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
             User CurrentUser = _context.Users.Find(Int32.Parse(userId));
             CurrentUser.Adress = adress;
             CurrentUser.Username = username;
+            CurrentUser.Name = name;
+            CurrentUser.SurName = surname;
+            CurrentUser.PhoneNumber = phonenumber;
+            CurrentUser.Birth = birth;
+            CurrentUser.Email = email;
             _context.SaveChanges();
             return RedirectToAction("Index", "UserPage");
         }

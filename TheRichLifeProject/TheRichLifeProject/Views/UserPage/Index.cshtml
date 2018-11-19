@@ -4,24 +4,64 @@
 }
 <h2>User info</h2>
 <form asp-controller="UserPage" asp-action="Edit" method="post">
-	<table>
-		<tr>
-			<td>
-				<label for="username">Username</label>
-			</td>
-			<td>
-				<input style="margin-left: 10px;" id="username" name="username" type="text" value="@Model.Username" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for="adress">Adress</label>
-			</td>
-			<td>
-				<input style="margin-left: 10px;" id="adress" name="adress" type="text" value="@Model.Adress" />
-			</td>
-		</tr>
-	</table>
+    <table>
+        <tr>
+            <td>
+                <label for="username">Username</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="username" name="username" type="text" value="@Model.Username" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="name">Name</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="name" name="name" type="text" value="@Model.Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="surname">Surname</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="surname" name="surname" type="text" value="@Model.SurName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Email</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="email" name="email" type="text" value="@Model.Email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="phonenumber">Phone Number</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="phonenumber" name="phonenumber" type="text" value="@Model.PhoneNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="birth">Birth</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="birth" name="birth" type="text" value="@Model.Birth" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="adress">Adress</label>
+            </td>
+            <td>
+                <input style="margin-left: 10px;" id="adress" name="adress" type="text" value="@Model.Adress" />
+            </td>
+        </tr>
+    </table>
 	<br />
 	<button type="submit">Gegevens Aanpassen</button>
 

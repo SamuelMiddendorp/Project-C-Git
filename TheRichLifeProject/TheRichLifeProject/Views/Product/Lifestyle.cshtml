@@ -2,23 +2,62 @@
 @{
     ViewData["Title"] = "Lifestyle";
 }
-
+<br />
 <h2>Lifestyle</h2>
 @* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
 <style>
+    p.one {
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: darkgrey;
+    }
     .product {
         background-color: #ff0000;
     }
+/*    
+    #catlifestyle {
+        position: absolute;
+        top: 26vh;
+        left: 17vw;
+    }
+*/
+    li a:hover {
+        color: blue;
+    }
 </style>
+<br />
 <form asp-controller="Product" asp-action="Lifestyle" method="get">
     <p>
         Title: <input type="text" name="SearchValue">
         <input type="submit" value="Filter" />
     </p>
 </form>
+<br />
 <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
+<br />
+<form asp-controller="Product" asp-action="Exotic" method="get" id="catlifestyle">
+    <p>
+        <div>
+            Category:
+        </div>
+        @{
+            @* Generates the filter radiobuttons *@
+            foreach (var value in Model.Categories)
+            {
+                <div>
+                    <input type="radio" id="@value" name="subcat" value="@value">
+                    <label for="@value">@value</label>
+                </div>
+            }
+            <div>
+                <input type="submit" value="Filter" />
+            </div>
+        }
+        <br />
+    </p>
+</form>
 @{
     /*foreach (var item in Model)
     {
@@ -72,7 +111,7 @@
         </div>
     }*/
 
-    foreach (var product in Model)
+    foreach (var product in Model.Products)
     {
         <div class="row col-lg-offset-3">
             <div class="row">
@@ -90,14 +129,15 @@
                         <div class="row"></div>
                         <div class="col-lg-3 col-lg-offset-5">
                             <br />
-                            <div>@product.ProductName</div>
+                            <p class="one"></p>
+                            @*<div>@product.ProductName</div>
                             <br />
                             <div>ID: @product.Id</div>
-                            <br />
+                            <br />*@
                             <div>Stock: @product.Stock left!</div>
-                            <br />
+                            <p></p>
                             <div>Category: @product.Category</div>
-                            <br />
+                            <p></p>
                             <div>@product.ShortDescription</div>
                         </div>
                     </div>

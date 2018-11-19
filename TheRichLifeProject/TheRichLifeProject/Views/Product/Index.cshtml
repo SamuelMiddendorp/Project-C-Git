@@ -2,23 +2,37 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<br />
 <h2>Index</h2>
 @* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
 <style>
+    p.one {
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: darkgrey;
+    }
     .product {
         background-color: #ff0000;
     }
+
+    li a:hover {
+        color: blue;
+    }
 </style>
+<br />
 <form asp-controller="Product" asp-action="Index" method="get">
     <p>
         Title: <input type="text" name="SearchValue">
         <input type="submit" value="Filter" />
     </p>
 </form>
+<br />
 <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
 <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
+
+<br />
+
 @{
     /*foreach (var item in Model)
     {
@@ -90,14 +104,16 @@
                         <div class="row"></div>
                         <div class="col-lg-3 col-lg-offset-5">
                             <br />
-                            <div>@product.ProductName</div>
-                            <br />
+                            <p class="one"></p>
+                            @*<div>@product.ProductName</div>
+                            <p></p>
+                            @*<br />
                             <div>ID: @product.Id</div>
-                            <br />
+                            <br />*@
                             <div>Stock: @product.Stock left!</div>
-                            <br />
+                            <p></p>
                             <div>Category: @product.Category</div>
-                            <br />
+                            <p></p>
                             <div>@product.ShortDescription</div>
                         </div>
                     </div>
