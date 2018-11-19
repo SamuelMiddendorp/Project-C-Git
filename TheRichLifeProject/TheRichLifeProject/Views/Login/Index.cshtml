@@ -3,17 +3,17 @@
 	ViewData["Title"] = "Login";
 }
 
-<h2>Log hier in</h2>
+<h2>Login</h2>
 
 <form asp-controller="Login" asp-action="Login" method="post">
 	<label for="username">Username</label>
 	<input id="username" name="username" type="text" />
 	<label for="password">Password</label>
 	<input id="password" name="password" type="password" />
-	<button type="submit">Inloggen</button>
+	<button type="submit">Login</button>
 </form>
 <h4 style="color: red;">@Model</h4>
-<h4>Heb je nog geen account <a asp-controller="Login" asp-action="Registration">Registreer</a> dan hier</h4>
+<h4>Don't have an account yet, <a asp-controller="Login" asp-action="Registration">Register</a> here</h4>
 <form asp-controller="Login" asp-action="Logout">
 	<button type="submit">Log out</button>
 </form>
