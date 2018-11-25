@@ -9,5 +9,6 @@ namespace TheRichLifeProject.Models
     {
         public List<Product> Products { get; set; }
         public List<string> Categories { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }

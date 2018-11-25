@@ -65,10 +65,11 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Exotic(string subcat, string searchvalue)
+        public IActionResult Exotic(string subcat, string searchvalue, int pricerange)
         {
             //Filter the products
             var products = from p in _context.Products where p.Category == "Exotic" select p;
+            //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
@@ -81,11 +82,21 @@ namespace TheRichLifeProject.Controllers
                                                (x.ProductName.Contains(searchvalue) || x.ShortDescription.Contains(searchvalue)));
 
             }
-
+            //Subcategory
             if (!string.IsNullOrEmpty(subcat))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
+            }
+            //Price
+            if (pricerange != 0)
+            {
+                products = products.Where(x => x.Price <= (pricerange));
+            }
+
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            {
+                products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
             }
 
             //Creating the filter buttons

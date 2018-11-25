@@ -62,11 +62,11 @@ namespace TheRichLifeProject.Controllers
         {
             if (HttpContext.Session.GetString("emptyfield") == "1")
             {
-                ViewBag.emptyfield = "Vul alstublieft alle velden in";
+                ViewBag.emptyfield = "Please fill in all the fields";
             }
             else if(HttpContext.Session.GetString("emptyfield") == "2")
             {
-                ViewBag.emptyfield = "Deze gebruikersnaam komt al voor in onze database";
+                ViewBag.emptyfield = "This username already exists in our database";
             }
             return View();
         }
