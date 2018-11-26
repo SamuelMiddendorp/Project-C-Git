@@ -62,7 +62,7 @@ namespace TheRichLifeProject.Controllers
         {
             if (HttpContext.Session.GetString("emptyfield") == "1")
             {
-                ViewBag.emptyfield = "Please fill in all the fields";
+                ViewBag.emptyfield = "This is not a valid phonenumber";
             }
             else if(HttpContext.Session.GetString("emptyfield") == "2")
             {
@@ -73,9 +73,10 @@ namespace TheRichLifeProject.Controllers
         public IActionResult Register(string username, string password, string name, string surname, string email, int phonenumber, DateTime birth, string adress)
         {
             HttpContext.Session.SetString("emptyfield", "0");
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(adress)) { 
+            if (!(phonenumber > 0)) { 
                 HttpContext.Session.SetString("emptyfield", "1");
                 return RedirectToAction("Registration");
+                HttpContext.Session.SetString("emptyfield", "0");
             }
             else if(_context.Users.Any(x => x.Username == username)){
                 HttpContext.Session.SetString("emptyfield", "2");
