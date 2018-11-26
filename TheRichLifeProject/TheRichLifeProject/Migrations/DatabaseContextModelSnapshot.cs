@@ -135,7 +135,8 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<int>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(10);
 
                     b.Property<string>("Role");
 

@@ -70,13 +70,13 @@ namespace TheRichLifeProject.Controllers
             }
             return View();
         }
-        public IActionResult Register(string username, string password, string name, string surname, string email, int phonenumber, DateTime birth, string adress)
+        public IActionResult Register(string username, string password, string name, string surname, string email, string phonenumber, DateTime birth, string adress)
         {
             HttpContext.Session.SetString("emptyfield", "0");
-            if (!(phonenumber > 0)) { 
+            int p = Int32.Parse(phonenumber);
+            if (p < 0) { 
                 HttpContext.Session.SetString("emptyfield", "1");
                 return RedirectToAction("Registration");
-                HttpContext.Session.SetString("emptyfield", "0");
             }
             else if(_context.Users.Any(x => x.Username == username)){
                 HttpContext.Session.SetString("emptyfield", "2");
