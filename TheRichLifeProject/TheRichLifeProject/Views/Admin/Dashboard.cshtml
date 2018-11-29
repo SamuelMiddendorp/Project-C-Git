@@ -2,71 +2,28 @@
 @{
     ViewData["Title"] = "Dashboard";
     Layout = null;
-    
 }
+
+<!doctype html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/Dashboard.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/admin.css" />
+
 </head>
-
-<div class="wrapper">
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
-        </div>
-
-        <ul class="list-unstyled components">
-            <p>Dummy Heading</p>
-            <li class="active">
-                <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                <ul class="collapse list-unstyled" id="homeSubMenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                <ul class="collapse list-unstyled" id="pageSubMenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Portfolio</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+<body>
+    <div>
+        <ul class="nav flex-column" id="adminNav">
+            <li class="nav-item"><a class="active" href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
+            <li class="nav-item"><a href="@Url.Action("Users", "Admin")">Users</a></li>
+            <li class="nav-item"><a href="@Url.Action("Products", "Admin")">Products</a></li>
+            <li class="nav-item"><a href="@Url.Action("Statistics", "Admin")">Statistics</a></li>
         </ul>
 
-
-    </nav>
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-
-            </div>
-        </nav>
+        <div id="second">
+            <img id="logo" src="~/images/logo.png" />
+        </div>
     </div>
-</div>
+
+</body>
+</html>

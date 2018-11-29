@@ -25,7 +25,12 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                <a asp-action="AddProduct" asp-controller="Administrator"><span class="glyphicon glyphicon-plus" style="margin-left:3%"></span></a>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </th>
+            <th>
+                <a asp-action="AddProductPage">
+                <span class="glyphicon glyphicon-plus" style="padding-left:20px"></span>
+                </a>
             </th>
          <th></th>
         </tr>
@@ -51,9 +56,18 @@
                     @Html.DisplayFor(modelItem => item.Stock)
                 </td>
                 <td>
-                    <a asp-action="EditProductPage" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a asp-action="ProductDetails" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
-                    <a asp-action="DeleteProduct" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+                    @Html.DisplayFor(modelItem => item.ShortDescription)
+                </td>
+                <td>
+                    <a asp-action="EditProductPage" asp-route-id="@item.Id">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a asp-action="ProductDetails" asp-route-id="@item.Id">
+                    <span class="glyphicon glyphicon-book"></span>
+                    </a>
+                    <a asp-action="DeleteProduct" asp-route-id="@item.Id">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    </a>
                 </td>
             </tr>
         }

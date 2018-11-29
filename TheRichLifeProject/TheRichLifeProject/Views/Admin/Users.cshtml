@@ -16,16 +16,21 @@
                 @Html.DisplayNameFor(model => model.Username)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateRegistered)
+                @Html.DisplayNameFor(model => model.Role)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Adress)
             </th>
             <th>
-                <a asp-action="AddUser" asp-controller="Administrator"><span class="glyphicon glyphicon-plus" style="margin-left:10%"></span></a>
+                @Html.DisplayNameFor(model => model.DateRegistered)
+            </th>
+            <th>
+                <a asp-action="AddUserPage">
+                    <span class="glyphicon glyphicon-plus" style="padding-left:20px"></span>
+                </a>
             </th>
             <th></th>
         </tr>
@@ -33,28 +38,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateRegistered)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Adress)
-                </td>
-                <td>
-                    <a asp-action="EditUserPage" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a asp-action="UserDetails" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
-                    <a asp-action="DeleteUser" asp-controller="Administrator" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRegistered)
+            </td>
+            <td>
+                <a asp-action="EditUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
+                <a asp-action="UserDetails" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
+                <a asp-action="DeleteUser" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

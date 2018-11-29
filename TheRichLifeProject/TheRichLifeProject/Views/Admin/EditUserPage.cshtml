@@ -1,16 +1,17 @@
 ﻿@model TheRichLifeProject.Models.User
 
 @{
-    ViewData["Title"] = "EditUserPage";
+    ViewData["Title"] = "EditUser";
 }
 
 <h2>EditUser</h2>
 
 <h4>User</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditUser" asp-controller="Administrator">
+        <form asp-action="EditUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">

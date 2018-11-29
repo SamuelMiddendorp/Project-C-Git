@@ -1,0 +1,46 @@
+﻿body {
+    margin: 0;
+}
+
+#logo {
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+}
+
+#adminNav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #1e1919;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    float: left;
+    text-align: center;
+}
+
+#second {
+    width: 80%;
+    height: 110px;
+    float: right;
+    border-bottom: 1px solid;
+}
+
+li a {
+    display: block;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+        background-color: #4CAF50;
+        color: black;
+}
+
+li a:hover:not(.active) {
+        background-color: #555;
+        color: black;
+}

@@ -18,4 +18,3 @@ namespace TheRichLifeProject.Models
         public DbSet<WishListItem> WishListItems { get; set; }
     }
 }
-//Welp, as you can see branching works :D
