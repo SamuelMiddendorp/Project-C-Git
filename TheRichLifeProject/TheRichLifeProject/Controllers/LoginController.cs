@@ -62,18 +62,19 @@ namespace TheRichLifeProject.Controllers
         {
             if (HttpContext.Session.GetString("emptyfield") == "1")
             {
-                ViewBag.emptyfield = "Vul alstublieft alle velden in";
+                ViewBag.emptyfield = "This is not a valid phonenumber";
             }
             else if(HttpContext.Session.GetString("emptyfield") == "2")
             {
-                ViewBag.emptyfield = "Deze gebruikersnaam komt al voor in onze database";
+                ViewBag.emptyfield = "This username already exists in our database";
             }
             return View();
         }
-        public IActionResult Register(string username, string password, string name, string surname, string email, int phonenumber, DateTime birth, string adress)
+        public IActionResult Register(string username, string password, string name, string surname, string email, string phonenumber, DateTime birth, string adress)
         {
             HttpContext.Session.SetString("emptyfield", "0");
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(adress)) { 
+            int p = Int32.Parse(phonenumber);
+            if (p < 0) { 
                 HttpContext.Session.SetString("emptyfield", "1");
                 return RedirectToAction("Registration");
             }

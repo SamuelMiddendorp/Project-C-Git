@@ -19,13 +19,13 @@
         .product {
             background-color: #ff0000;
         }
-/*
+
         #catexotic {
             position: absolute;
-            top: 30vh;
+            top: 20vh;
             left: 20vw;
         }
-*/
+
         li a:hover {
             color: blue;  
             
@@ -41,15 +41,15 @@
         </p>
     </form>
 
-    <br />
-
-    <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
-    <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
-    <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
-
-    <br />
-
     <form asp-controller="Product" asp-action="Exotic" method="get" id="catexotic">
+        <br />
+
+        <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
+        <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
+        <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
+
+        <br />
+
         <p>
             <div>
                 Category:
@@ -62,14 +62,54 @@
                         <input type="radio" id="@value" name="subcat" value="@value">
                         <label for="@value">@value</label>
                     </div>
-                }
-                <div>
-                    <input type="submit" value="Filter" />
-                </div>
+                }               
             }
-            <br />
+        </p>
+
+        <p>
+            <div>
+                Max Price:
+            </div>
+            @* Generates the price filter *@
+            @*
+            <div>
+                <input type="radio" id="2000" name="pricerange" value="2000">
+                <label for="2000">2,000</label>
+            </div>
+            <div>
+                <input type="radio" id="4000" name="pricerange" value="4000">
+                <label for="4000">4,000</label>
+            </div>
+            <div>
+                <input type="radio" id="8000" name="pricerange" value="8000">
+                <label for="8000">8,000</label>
+            </div>
+            <div>
+                <input type="radio" id="1000000" name="pricerange" value="1000000">
+                <label for="1000000">10,000+</label>
+            </div>
+            *@
+            <div>
+                2000 - 10000
+            </div>
+            <div>
+                <input type="range" id="pricerange" name="pricerange" min="2000" max="10000" step="2000" value="10000" list="pricelist"/>
+            </div>
+            
+            <datalist id="pricelist">
+                <option value="2000"> </option> 
+                <option value="4000"> </option>
+                <option value="6000"> </option>
+                <option value="8000"> </option>
+                <option value="10000"> </option>
+            </datalist>
+
+            <div>
+                <input type="submit" value="Filter" />
+            </div>
         </p>
     </form>
+    
 
     @{
         /*foreach (var item in Model)
