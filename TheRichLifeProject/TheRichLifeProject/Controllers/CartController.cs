@@ -66,6 +66,14 @@ namespace TheRichLifeProject.Controllers
             }
             return Cart;
         }
+        public List<CartItem> GetCartConfirm()
+        {
+            List<CartItem> Cart;
+            
+                Cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart");
+            
+            return Cart;
+        }
         public IActionResult Plus(int productId)
         {
             var cart = GetCart();
@@ -119,5 +127,20 @@ namespace TheRichLifeProject.Controllers
 
             return View("AddSucces");
         }
+        [Authorize]
+        public IActionResult Confirm(string adress, string name, string surname, string phonenumber, string email)
+        {
+            var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            User CurrentUser = _context.Users.Find(Int32.Parse(userId));
+            CurrentUser.Adress = adress;
+            
+            CurrentUser.Name = name;
+            CurrentUser.SurName = surname;
+            CurrentUser.PhoneNumber = phonenumber;
+            
+            CurrentUser.Email = email;
+            return View(GetCartConfirm());
+        }
+
     }
 }
