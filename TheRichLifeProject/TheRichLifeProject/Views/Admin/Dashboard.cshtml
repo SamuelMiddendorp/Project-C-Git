@@ -8,19 +8,37 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/admin.css" />
 
 </head>
 <body>
     <div>
         <ul class="nav flex-column" id="adminNav">
-            <li class="nav-item"><a class="active" href="@Url.Action("Dashboard", "Admin")">Dashboard</a></li>
-            <li class="nav-item"><a href="@Url.Action("Users", "Admin")">Users</a></li>
-            <li class="nav-item"><a href="@Url.Action("Products", "Admin")">Products</a></li>
-            <li class="nav-item"><a href="@Url.Action("Statistics", "Admin")">Statistics</a></li>
+            <li class="nav-item" id="dashboard">
+                <a class="active" href="@Url.Action("Dashboard", "Admin")">
+                <span class="glyphicon glyphicon-dashboard"></span><br />
+                <span class="glyphicon-class">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item" id="users"><a href="@Url.Action("Users", "Admin")">
+                  <span class="glyphicon glyphicon-user"></span><br />
+                  <span class="glyphicon-class">Users</span>
+                  </a>
+            </li>
+            <li class="nav-item" id="products"><a href="@Url.Action("Products", "Admin")">
+                  <span class="glyphicon glyphicon-shopping-cart"></span><br />
+                  <span class="glyphicon-class">Products</span>
+                  </a>
+            </li>
+            <li class="nav-item" id="statistics"><a href="@Url.Action("Statistics", "Admin")">
+                  <span class="glyphicon glyphicon-stats"></span><br />
+                  <span class="glyphicon-class">Statistics</span>
+                  </a>
+            </li>
         </ul>
 
-        <div id="second">
+        <div id="header">
             <img id="logo" src="~/images/logo.png" />
         </div>
     </div>
