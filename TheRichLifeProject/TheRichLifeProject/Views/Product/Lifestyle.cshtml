@@ -6,21 +6,26 @@
 <h2>Lifestyle</h2>
 @* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
 <style>
+    p.groove {
+        border-style: groove;
+    }
+
     p.one {
         border-style: solid;
         border-width: 0.5px;
         border-color: darkgrey;
     }
+
     .product {
         background-color: #ff0000;
     }
-/*    
+
     #catlifestyle {
         position: absolute;
-        top: 30vh;
+        top: 20vh;
         left: 20vw;
     }
-*/
+
     li a:hover {
         color: blue;
     }
@@ -32,12 +37,14 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
-<br />
-<li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
-<li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
-<li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
-<br />
-<form asp-controller="Product" asp-action="Exotic" method="get" id="catlifestyle">
+<form asp-controller="Product" asp-action="Lifestyle" method="get" id="catlifestyle">
+    <br />
+    <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
+    <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
+    <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
+
+    <br />
+
     <p>
         <div>
             Category:
@@ -51,11 +58,33 @@
                     <label for="@value">@value</label>
                 </div>
             }
-            <div>
-                <input type="submit" value="Filter" />
-            </div>
         }
-        <br />
+    </p>
+
+    <p>
+        <div>
+            Max Price: <output id="pricerange_disp"></output>
+        </div>
+        @* Generates the price filter *@
+        <div>
+            <input type="range" id="pricerange" name="pricerange" min="1000000" max="481000000" step="60000000" value="48100000" list="pricelist" oninput="pricerange_disp.value = pricerange.value">
+        </div>
+
+        <datalist id="pricelist">
+            <option value="1000000"> </option>
+            <option value="61000000"> </option>
+            <option value="121000000"> </option>
+            <option value="181000000"> </option>
+            <option value="241000000"> </option>
+            <option value="301000000"> </option>
+            <option value="361000000"> </option>
+            <option value="421000000"> </option>
+            <option value="481000000"> </option>
+        </datalist>
+
+        <div>
+            <input type="submit" value="Filter" />
+        </div>
     </p>
 </form>
 @{

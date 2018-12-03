@@ -30,10 +30,11 @@ namespace TheRichLifeProject.Controllers
             }
             return View(products);
         }
-        public IActionResult Fashion(string subcat, string searchvalue)
+        public IActionResult Fashion(string subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
             var products = from p in _context.Products where p.Category == "Fashion" select p;
+            //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
@@ -45,6 +46,23 @@ namespace TheRichLifeProject.Controllers
                 products = products.Where(x => x.SubCategory == (subcat));
 
             }
+            //Subcategory
+            if (!string.IsNullOrEmpty(subcat))
+            {
+                products = products.Where(x => x.SubCategory == (subcat));
+
+            }
+            //Price
+            if (pricerange != 0)
+            {
+                products = products.Where(x => x.Price <= (pricerange));
+            }
+
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            {
+                products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
+            }
+            //Button
 
             //Creating the filter buttons
             CategoryViewModel subprod = new CategoryViewModel();
@@ -118,10 +136,11 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Lifestyle(string subcat, string searchvalue)
+        public IActionResult Lifestyle(string subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
             var products = from p in _context.Products where p.Category == "Lifestyle" select p;
+            //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
@@ -132,6 +151,22 @@ namespace TheRichLifeProject.Controllers
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
+            }
+            //Subcategory
+            if (!string.IsNullOrEmpty(subcat))
+            {
+                products = products.Where(x => x.SubCategory == (subcat));
+
+            }
+            //Price
+            if (pricerange != 0)
+            {
+                products = products.Where(x => x.Price <= (pricerange));
+            }
+
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            {
+                products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
             }
             //Creating the filter buttons
             CategoryViewModel subprod = new CategoryViewModel();

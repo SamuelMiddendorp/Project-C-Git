@@ -6,7 +6,6 @@
     <h2>Exotic</h2>
     @* Klein voorbeeld hier van hoe je stijlen zou kunnen toepassen.W *@
     <style>
-
         p.groove {
             border-style: groove;
         }
@@ -19,19 +18,17 @@
         .product {
             background-color: #ff0000;
         }
-
+        
         #catexotic {
             position: absolute;
             top: 20vh;
             left: 20vw;
         }
-
+        
         li a:hover {
-            color: blue;  
-            
+            color: blue;              
         }
     </style>
-
     <br />
 
     <form asp-controller="Product" asp-action="Exotic" method="get">
@@ -43,7 +40,6 @@
 
     <form asp-controller="Product" asp-action="Exotic" method="get" id="catexotic">
         <br />
-
         <li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
         <li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
         <li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
@@ -68,40 +64,26 @@
 
         <p>
             <div>
-                Max Price:
+                Max Price: <output id="pricerange_disp"></output>
             </div>
             @* Generates the price filter *@
-            @*
             <div>
-                <input type="radio" id="2000" name="pricerange" value="2000">
-                <label for="2000">2,000</label>
-            </div>
-            <div>
-                <input type="radio" id="4000" name="pricerange" value="4000">
-                <label for="4000">4,000</label>
-            </div>
-            <div>
-                <input type="radio" id="8000" name="pricerange" value="8000">
-                <label for="8000">8,000</label>
-            </div>
-            <div>
-                <input type="radio" id="1000000" name="pricerange" value="1000000">
-                <label for="1000000">10,000+</label>
-            </div>
-            *@
-            <div>
-                2000 - 10000
-            </div>
-            <div>
-                <input type="range" id="pricerange" name="pricerange" min="2000" max="10000" step="2000" value="10000" list="pricelist"/>
+                <input type="range" id="pricerange" name="pricerange" min="50000" max="600000" step="50000" value="600000" list="pricelist" oninput="pricerange_disp.value = pricerange.value">                    
             </div>
             
             <datalist id="pricelist">
-                <option value="2000"> </option> 
-                <option value="4000"> </option>
-                <option value="6000"> </option>
-                <option value="8000"> </option>
-                <option value="10000"> </option>
+                <option value="50000"> </option>
+                <option value="100000"> </option>
+                <option value="150000"> </option>
+                <option value="200000"> </option>
+                <option value="250000"> </option>
+                <option value="300000"> </option>
+                <option value="350000"> </option>
+                <option value="400000"> </option>
+                <option value="450000"> </option>
+                <option value="500000"> </option>
+                <option value="550000"> </option>
+                <option value="600000"> </option>
             </datalist>
 
             <div>
