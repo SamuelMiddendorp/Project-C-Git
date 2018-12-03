@@ -1,0 +1,7 @@
+
+*.ide
+*.lock
+*.ide-shm
+*.ide-wal
+*.xml
+*.lock
