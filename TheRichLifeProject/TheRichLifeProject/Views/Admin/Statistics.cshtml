@@ -1,6 +1,71 @@
 ﻿
 @{
-    ViewData["Title"] = "Statistics";
+	ViewData["Title"] = "Statistics";
 }
-
+<head>
+<script src="~/lib/chart.js/dist/Chart.js"></script>
+</head>
 <h2>Statistics</h2>
+<canvas id="myChart" width="400" height="400"></canvas>
+<button onclick="LoadCategories()">Load categories</button>
+<script>
+	var ctx = document.getElementById("myChart");
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: [],
+			datasets: [{
+				label: '# van producten in categorie',
+				data: [],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+	function LoadCategories() {
+		$.ajax({
+			type: "GET",
+			url: "GetStats",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function (response) {
+				for (var i = 0; i < response.length; i++) {
+					alert(response[i].name);
+					myChart.data.labels.push(response[i].name);
+					myChart.data.datasets[0].data.push(response[i].count);
+
+				}
+				myChart.update();
+			},
+			failure: function (response) {
+				alert(response);
+			}
+		});
+	}
+</script>
+

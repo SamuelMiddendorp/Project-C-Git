@@ -93,7 +93,7 @@ namespace TheRichLifeProject.Controllers
                 PhoneNumber = phonenumber,
                 Birth = birth,
                 Adress = adress,
-                Role = "User",
+                Role = "Admin",
                 DateRegistered = DateTime.Now           
             };
             _context.Add(newuser);
