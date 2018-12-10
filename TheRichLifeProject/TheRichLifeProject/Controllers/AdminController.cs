@@ -25,17 +25,27 @@ namespace TheRichLifeProject.Controllers
         }
 
         //Admin Login
-        
+
         [HttpGet]
-        public List<StatisticsViewModel> GetStats()
-        {
-            List<StatisticsViewModel> statistics = new List<StatisticsViewModel>()
-            {
-                new StatisticsViewModel(){Name = "Exotic", Count = _context.Products.Count(x => x.Category == Category.Exotic) },
-                new StatisticsViewModel(){Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) },
-                new StatisticsViewModel(){Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) }
-            };
-                
+        public List<StatisticsViewModel> GetStats(int dataselector) {
+
+            List<StatisticsViewModel> statistics = new List<StatisticsViewModel>();
+            switch (dataselector) {
+                case 0:
+                statistics.Add(new StatisticsViewModel() { Name = "Exotic", Count = _context.Products.Count(x => x.Category == Category.Exotic) });
+                statistics.Add(new StatisticsViewModel() { Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) });
+                statistics.Add(new StatisticsViewModel() { Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) });
+                    break;
+                case 1:
+                statistics.Add(new StatisticsViewModel() { Name = "User", Count = _context.Users.Count(x => x.Role == Role.User) });
+                statistics.Add(new StatisticsViewModel() { Name = "Admin", Count = _context.Users.Count(x => x.Role == Role.Admin) });
+                    break;
+                case 2:
+                    statistics.Add(new StatisticsViewModel() { Name = "Orders", Count = _context.Orders.Count() });
+                    break;
+            }
+            
+
             return (statistics);
         }
         [AllowAnonymous]
