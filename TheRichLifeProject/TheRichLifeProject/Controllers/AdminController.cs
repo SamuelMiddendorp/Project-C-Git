@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TheRichLifeProject.Models;
+using TheRichLifeProject.ViewModel;
 
 namespace TheRichLifeProject.Controllers
 {
@@ -24,6 +25,19 @@ namespace TheRichLifeProject.Controllers
         }
 
         //Admin Login
+        
+        [HttpGet]
+        public List<StatisticsViewModel> GetStats()
+        {
+            List<StatisticsViewModel> statistics = new List<StatisticsViewModel>()
+            {
+                new StatisticsViewModel(){Name = "Exotic", Count = _context.Products.Count(x => x.Category == "Exotic") },
+                new StatisticsViewModel(){Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == "Lifestyle") },
+                new StatisticsViewModel(){Name = "Fashion", Count = _context.Products.Count(x => x.Category == "Fashion") }
+            };
+                
+            return (statistics);
+        }
         [AllowAnonymous]
         public IActionResult Login(string username, string password)
         {
