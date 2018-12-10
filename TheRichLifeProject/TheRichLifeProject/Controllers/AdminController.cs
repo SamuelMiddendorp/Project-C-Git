@@ -31,9 +31,9 @@ namespace TheRichLifeProject.Controllers
         {
             List<StatisticsViewModel> statistics = new List<StatisticsViewModel>()
             {
-                new StatisticsViewModel(){Name = "Exotic", Count = _context.Products.Count(x => x.Category == "Exotic") },
-                new StatisticsViewModel(){Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == "Lifestyle") },
-                new StatisticsViewModel(){Name = "Fashion", Count = _context.Products.Count(x => x.Category == "Fashion") }
+                new StatisticsViewModel(){Name = "Exotic", Count = _context.Products.Count(x => x.Category == Category.Exotic) },
+                new StatisticsViewModel(){Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) },
+                new StatisticsViewModel(){Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) }
             };
                 
             return (statistics);

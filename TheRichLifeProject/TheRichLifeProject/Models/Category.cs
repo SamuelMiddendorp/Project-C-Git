@@ -10,8 +10,4 @@ namespace TheRichLifeProject.Models
         Exotic, Fashion, Lifestyle
     }
 
-    public enum SubCategory
-    {
-        Sub1, Sub2, Sub3
-    }
 }

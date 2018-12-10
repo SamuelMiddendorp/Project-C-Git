@@ -30,7 +30,7 @@ namespace TheRichLifeProject.Controllers
             }
             return View(products);
         }
-        public IActionResult Fashion(SubCategory subcat, string searchvalue, int pricerange)
+        public IActionResult Fashion(string subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
             var products = from p in _context.Products where p.Category == Category.Fashion select p;
@@ -83,7 +83,7 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Exotic(SubCategory subcat, string searchvalue, int pricerange)
+        public IActionResult Exotic(string subcat, string searchvalue, int pricerange)
         {
             //Filter the products
             var products = from p in _context.Products where p.Category == Category.Exotic select p;
@@ -136,7 +136,7 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Lifestyle(SubCategory subcat, string searchvalue, int pricerange)
+        public IActionResult Lifestyle(string subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
             var products = from p in _context.Products where p.Category == Category.Lifestyle select p;

@@ -92,7 +92,8 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<int>("Stock");
 
-                    b.Property<int>("SubCategory");
+                    b.Property<string>("SubCategory")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

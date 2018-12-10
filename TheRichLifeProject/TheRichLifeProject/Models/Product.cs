@@ -33,7 +33,7 @@ namespace TheRichLifeProject.Models
         public Category Category { get; set; }
 
         [Required]
-        public SubCategory SubCategory { get; set; }
+        public string SubCategory { get; set; }
 
         public virtual List<Value> Values { get; set; }
 
