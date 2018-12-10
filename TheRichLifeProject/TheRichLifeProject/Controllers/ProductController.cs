@@ -30,24 +30,24 @@ namespace TheRichLifeProject.Controllers
             }
             return View(products);
         }
-        public IActionResult Fashion(string subcat, string searchvalue, int pricerange)
+        public IActionResult Fashion(SubCategory subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
-            var products = from p in _context.Products where p.Category == "Fashion" select p;
+            var products = from p in _context.Products where p.Category == Category.Fashion select p;
             //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
-                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Fashion"));
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category == Category.Fashion);
             }
 
-            if (!string.IsNullOrEmpty(subcat) && string.IsNullOrEmpty(searchvalue))
+            if (!string.IsNullOrEmpty(subcat.ToString()) && string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
             }
             //Subcategory
-            if (!string.IsNullOrEmpty(subcat))
+            if (!string.IsNullOrEmpty(subcat.ToString()))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
@@ -58,7 +58,7 @@ namespace TheRichLifeProject.Controllers
                 products = products.Where(x => x.Price <= (pricerange));
             }
 
-            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat.ToString())))
             {
                 products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
             }
@@ -67,11 +67,11 @@ namespace TheRichLifeProject.Controllers
             //Creating the filter buttons
             CategoryViewModel subprod = new CategoryViewModel();
             List<string> categories = new List<string>();
-            foreach (var item in _context.Products.Where(x => x.Category == "Fashion"))
+            foreach (var item in _context.Products.Where((System.Linq.Expressions.Expression<Func<Product, bool>>)(x => x.Category == Category.Fashion)))
             {
-                if (!categories.Contains(item.SubCategory))
+                if (!categories.Contains(item.SubCategory.ToString()))
                 {
-                    categories.Add(item.SubCategory);
+                    categories.Add(item.SubCategory.ToString());
                 }
                 else
                 {
@@ -83,25 +83,25 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Exotic(string subcat, string searchvalue, int pricerange)
+        public IActionResult Exotic(SubCategory subcat, string searchvalue, int pricerange)
         {
             //Filter the products
-            var products = from p in _context.Products where p.Category == "Exotic" select p;
+            var products = from p in _context.Products where p.Category == Category.Exotic select p;
             //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
-                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Exotic"));
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category == Category.Exotic);
             }
 
-            if (!string.IsNullOrEmpty(subcat) && !string.IsNullOrEmpty(searchvalue))
+            if (!string.IsNullOrEmpty(subcat.ToString()) && !string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.SubCategory == (subcat) && 
                                                (x.ProductName.Contains(searchvalue) || x.ShortDescription.Contains(searchvalue)));
 
             }
             //Subcategory
-            if (!string.IsNullOrEmpty(subcat))
+            if (!string.IsNullOrEmpty(subcat.ToString()))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
@@ -112,7 +112,7 @@ namespace TheRichLifeProject.Controllers
                 products = products.Where(x => x.Price <= (pricerange));
             }
 
-            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat.ToString())))
             {
                 products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
             }
@@ -120,11 +120,11 @@ namespace TheRichLifeProject.Controllers
             //Creating the filter buttons
             CategoryViewModel subprod = new CategoryViewModel();
             List<string> categories = new List<string>();
-            foreach (var item in _context.Products.Where(x => x.Category == "Exotic"))
+            foreach (var item in _context.Products.Where((System.Linq.Expressions.Expression<Func<Product, bool>>)(x => x.Category == Category.Exotic)))
             {
-                if(!categories.Contains(item.SubCategory))
+                if(!categories.Contains(item.SubCategory.ToString()))
                 {
-                    categories.Add(item.SubCategory);
+                    categories.Add(item.SubCategory.ToString());
                 }
                 else
                 {
@@ -136,24 +136,24 @@ namespace TheRichLifeProject.Controllers
 
             return View(subprod);
         }
-        public IActionResult Lifestyle(string subcat, string searchvalue, int pricerange)
+        public IActionResult Lifestyle(SubCategory subcat, string searchvalue, int pricerange)
         {
             //Filtering the products
-            var products = from p in _context.Products where p.Category == "Lifestyle" select p;
+            var products = from p in _context.Products where p.Category == Category.Lifestyle select p;
             //Searchbar
             if (!string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.ProductName.Contains(searchvalue)
-                                        || x.ShortDescription.Contains(searchvalue) && x.Category.Contains("Lifestyle"));
+                                        || x.ShortDescription.Contains(searchvalue) && x.Category == Category.Lifestyle);
             }
 
-            if (!string.IsNullOrEmpty(subcat) && string.IsNullOrEmpty(searchvalue))
+            if (!string.IsNullOrEmpty(subcat.ToString()) && string.IsNullOrEmpty(searchvalue))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
             }
             //Subcategory
-            if (!string.IsNullOrEmpty(subcat))
+            if (!string.IsNullOrEmpty(subcat.ToString()))
             {
                 products = products.Where(x => x.SubCategory == (subcat));
 
@@ -164,18 +164,18 @@ namespace TheRichLifeProject.Controllers
                 products = products.Where(x => x.Price <= (pricerange));
             }
 
-            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat)))
+            if ((pricerange != 0) && (!string.IsNullOrEmpty(subcat.ToString())))
             {
                 products = products.Where(x => x.SubCategory == (subcat) && x.Price <= (pricerange));
             }
             //Creating the filter buttons
             CategoryViewModel subprod = new CategoryViewModel();
             List<string> categories = new List<string>();
-            foreach (var item in _context.Products.Where(x => x.Category == "Lifestyle"))
+            foreach (var item in _context.Products.Where((System.Linq.Expressions.Expression<Func<Product, bool>>)(x => x.Category == Category.Lifestyle)))
             {
-                if (!categories.Contains(item.SubCategory))
+                if (!categories.Contains(item.SubCategory.ToString()))
                 {
-                    categories.Add(item.SubCategory);
+                    categories.Add(item.SubCategory.ToString());
                 }
                 else
                 {

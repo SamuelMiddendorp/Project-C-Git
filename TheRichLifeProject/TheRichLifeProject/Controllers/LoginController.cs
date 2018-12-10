@@ -26,10 +26,10 @@ namespace TheRichLifeProject.Controllers
             User User = new User
             {
                 DateRegistered = DateTime.Now,
-                Adress = "Azaleastraat 15",
+                Address = "Azaleastraat 15",
                 Username = "Test",
                 Password = "12345",
-                Role = "User"
+                Role = Role.User
             };
 
             Product Product = new Product
@@ -49,8 +49,8 @@ namespace TheRichLifeProject.Controllers
             {
                 Username = "Test2",
                 Password = "123",
-                Role = "User",
-                Adress = "TestAdress 12",
+                Role = Role.User,
+                Address = "TestAdress 12",
                 DateRegistered = DateTime.Now
             };
             //HttpContext.Session.SetObjectAsJson("Cart", Test);
@@ -70,33 +70,33 @@ namespace TheRichLifeProject.Controllers
             }
             return View();
         }
-        public IActionResult Register(string username, string password, string name, string surname, string email, string phonenumber, DateTime birth, string adress)
+        public IActionResult Register(User newUser)
         {
             HttpContext.Session.SetString("emptyfield", "0");
-            int p = Int32.Parse(phonenumber);
+            int p = Int32.Parse(newUser.PhoneNumber);
             if (p < 0) { 
                 HttpContext.Session.SetString("emptyfield", "1");
                 return RedirectToAction("Registration");
             }
-            else if(_context.Users.Any(x => x.Username == username)){
+            else if(_context.Users.Any(x => x.Username == newUser.Username)){
                 HttpContext.Session.SetString("emptyfield", "2");
                 return RedirectToAction("Registration");
             }
 
-            User newuser = new User()
+            newUser = new User
             {
-                Username = username,
-                Password = password.ComputeSha256Hash(),
-                Name = name,
-                SurName = surname,
-                Email = email,
-                PhoneNumber = phonenumber,
-                Birth = birth,
-                Adress = adress,
-                Role = "User",
+                Username = newUser.Username,
+                Password = newUser.Password.ComputeSha256Hash(),
+                Name = newUser.Name,
+                SurName = newUser.SurName,
+                Email = newUser.Email,
+                PhoneNumber = newUser.PhoneNumber,
+                Birth = newUser.Birth,
+                Address = newUser.Address,
+                Role = Role.User,
                 DateRegistered = DateTime.Now           
             };
-            _context.Add(newuser);
+            _context.Add(newUser);
             _context.SaveChanges();
             return View();
         }
@@ -117,7 +117,7 @@ namespace TheRichLifeProject.Controllers
                     {
                         new Claim(ClaimTypes.Name, username, ClaimValueTypes.String),
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String),
-                        new Claim(ClaimTypes.Role, user.Role, ClaimValueTypes.String)
+                        new Claim(ClaimTypes.Role, user.Role.ToString(), ClaimValueTypes.String)
                     };
                     var userIdentity = new ClaimsIdentity(claims, "SecureLogin");
                     var userPrincipal = new ClaimsPrincipal(userIdentity);

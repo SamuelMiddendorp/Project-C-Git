@@ -20,7 +20,7 @@ namespace TheRichLifeProject.Migrations
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
-            modelBuilder.Entity("TheRichLifeProject.Models.Atribute", b =>
+            modelBuilder.Entity("TheRichLifeProject.Models.Attribute", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -29,7 +29,7 @@ namespace TheRichLifeProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Atributes");
+                    b.ToTable("Attributes");
                 });
 
             modelBuilder.Entity("TheRichLifeProject.Models.Order", b =>
@@ -75,7 +75,7 @@ namespace TheRichLifeProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Category");
+                    b.Property<int>("Category");
 
                     b.Property<string>("ImageSrc");
 
@@ -85,13 +85,14 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("ProductName");
+                    b.Property<string>("ProductName")
+                        .IsRequired();
 
                     b.Property<string>("ShortDescription");
 
                     b.Property<int>("Stock");
 
-                    b.Property<string>("SubCategory");
+                    b.Property<int>("SubCategory");
 
                     b.HasKey("Id");
 
@@ -123,26 +124,34 @@ namespace TheRichLifeProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adress");
+                    b.Property<string>("Address")
+                        .IsRequired();
 
                     b.Property<DateTime>("Birth");
 
                     b.Property<DateTime>("DateRegistered");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(16);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired();
 
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(10);
+                    b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("Role");
+                    b.Property<int>("Role");
 
-                    b.Property<string>("SurName");
+                    b.Property<string>("SurName")
+                        .IsRequired()
+                        .HasMaxLength(16);
 
-                    b.Property<string>("Username");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(16);
 
                     b.HasKey("Id");
 
@@ -154,7 +163,7 @@ namespace TheRichLifeProject.Migrations
                     b.Property<int>("ValueId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AtributeId");
+                    b.Property<int?>("AttributeId");
 
                     b.Property<int?>("ProductId");
 
@@ -162,7 +171,7 @@ namespace TheRichLifeProject.Migrations
 
                     b.HasKey("ValueId");
 
-                    b.HasIndex("AtributeId");
+                    b.HasIndex("AttributeId");
 
                     b.HasIndex("ProductId");
 
@@ -212,9 +221,9 @@ namespace TheRichLifeProject.Migrations
 
             modelBuilder.Entity("TheRichLifeProject.Models.Value", b =>
                 {
-                    b.HasOne("TheRichLifeProject.Models.Atribute", "Atribute")
+                    b.HasOne("TheRichLifeProject.Models.Attribute", "Attribute")
                         .WithMany("Values")
-                        .HasForeignKey("AtributeId");
+                        .HasForeignKey("AttributeId");
 
                     b.HasOne("TheRichLifeProject.Models.Product", "Product")
                         .WithMany("Values")

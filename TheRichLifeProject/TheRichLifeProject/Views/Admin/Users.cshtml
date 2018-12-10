@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Role)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Adress)
+                @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateRegistered)
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Adress)
+                @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateRegistered)
@@ -60,7 +60,7 @@
             <td>
                 <a asp-action="EditUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
                 <a asp-action="UserDetails" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
-                <a asp-action="DeleteUser" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+                <a asp-action="DeleteUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
         </tr>
         }

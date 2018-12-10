@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace TheRichLifeProject.Models
+{
+    public enum Category
+    {
+        Exotic, Fashion, Lifestyle
+    }
+
+    public enum SubCategory
+    {
+        Sub1, Sub2, Sub3
+    }
+}

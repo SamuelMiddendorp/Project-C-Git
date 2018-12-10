@@ -11,7 +11,7 @@ namespace TheRichLifeProject.Models
     {
         public int ValueId { get; set; }
         public string ValueValue { get; set; }
-        public Atribute Atribute { get; set; }
+        public Attribute Attribute { get; set; }
         public Product Product { get; set; }
     }
 }

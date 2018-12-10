@@ -128,17 +128,17 @@ namespace TheRichLifeProject.Controllers
             return View("AddSucces");
         }
         [Authorize]
-        public IActionResult Confirm(string adress, string name, string surname, string phonenumber, string email)
+        public IActionResult Confirm(User user)
         {
             var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
             User CurrentUser = _context.Users.Find(Int32.Parse(userId));
-            CurrentUser.Adress = adress;
+            CurrentUser.Address = user.Address;
             
-            CurrentUser.Name = name;
-            CurrentUser.SurName = surname;
-            CurrentUser.PhoneNumber = phonenumber;
+            CurrentUser.Name = user.Name;
+            CurrentUser.SurName = user.SurName;
+            CurrentUser.PhoneNumber = user.PhoneNumber;
             
-            CurrentUser.Email = email;
+            CurrentUser.Email = user.Email;
             return View(GetCartConfirm());
         }
 

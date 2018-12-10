@@ -13,7 +13,7 @@ using TheRichLifeProject.Models;
 
 namespace TheRichLifeProject.Controllers
 {
-    [Authorize]
+    [Authorize  ]
     public class AdminController : Controller
     {
         private readonly DatabaseContext _context;
@@ -33,13 +33,13 @@ namespace TheRichLifeProject.Controllers
             User admin = _context.Users.FirstOrDefault(u => u.Username == username);
 
             //Checks whether user (admin) is not null, password matches the one in the DB and the user has the role Admin
-            if (admin != null && admin.Password == password.ComputeSha256Hash() && admin.Role == "Admin")
+            if (admin != null && admin.Password == password.ComputeSha256Hash() && admin.Role == Role.Admin)
             {
                 //List of claims that stores the user's name, id and role
                 var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, username, ClaimValueTypes.String),
                     new Claim(ClaimTypes.NameIdentifier, admin.Id.ToString(), ClaimValueTypes.String),
-                    new Claim(ClaimTypes.Role, admin.Role, ClaimValueTypes.String)
+                    new Claim(ClaimTypes.Role, admin.Role.ToString(), ClaimValueTypes.String)
                 };
                 var userIdentity = new ClaimsIdentity(claims, "SecureLogin");
                 var userPrincipal = new ClaimsPrincipal(userIdentity);
@@ -55,7 +55,7 @@ namespace TheRichLifeProject.Controllers
                 return RedirectToAction("Dashboard");
             }
 
-            else if (admin.Role != "Admin")
+            else if (admin.Role != Role.Admin)
             {
                 ViewBag.Allowence = "You're not authorized to proceed";
                 return View();
@@ -119,67 +119,6 @@ namespace TheRichLifeProject.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
-        //Page where the admin can edit the info of a user
-        public async Task<IActionResult> EditUserPage(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            User user = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
-
-            return View(user);
-        }
-
-        //Edit user information
-        [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult EditUser(int id, string username, string password,
-            string role, string adress)
-        {
-
-            //Searches for a user id that mathch the given id
-            User currentUser = _context.Users.FirstOrDefault(u => u.Id == id);
-
-            currentUser.Username = username;
-            currentUser.Password = password.ComputeSha256Hash();
-            currentUser.Role = role;
-            currentUser.Adress = adress;
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Users");
-        }
-
-        //Delete user
-        public IActionResult DeleteUser(int? id)
-        {
-            //Check whether id is 0 and return a not found result if id is 0
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            //Get the specified user by checking if the given id matches a single Id in the DB
-            User user = _context.Users.SingleOrDefault(u => u.Id == id);
-
-            return View(user);
-        }
-
-        //Confirmation for deleteting specified user
-        public IActionResult DeleteUserConfirmation(int id)
-        {
-            User user = _context.Users.SingleOrDefault(u => id == u.Id);
-
-            //Remove specified user from the DB
-            _context.Users.Remove(user);
-
-            //Await until DB has saved changes
-            _context.SaveChanges();
-
-            return RedirectToAction("Users");
-        }
-
         // GET: Admin/Details/5
         public IActionResult UserDetails(int? id)
         {
@@ -198,8 +137,120 @@ namespace TheRichLifeProject.Controllers
             return View(user);
         }
 
-        //Admin page for adding products
-        public IActionResult AddProductPage()
+        //Goes to the page for adding a user
+        [ActionName("AddUserPage")]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
+        //Adding a new user
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult AddUser(User newUser)
+        {
+            newUser = new User
+            {
+                Username = newUser.Username,
+                Name = newUser.Name,
+                SurName = newUser.SurName,
+                Password = newUser.Password.ComputeSha256Hash(),
+                PhoneNumber = newUser.PhoneNumber,
+                Birth = newUser.Birth,
+                Email = newUser.Email,
+                Role = newUser.Role,
+                DateRegistered = DateTime.Now,
+                Address = newUser.Address
+            };
+
+            _context.Add(newUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("Users");
+        }
+
+        //Page where the admin can edit the info of a user
+        [ActionName("EditUserPage")]
+        public async Task<IActionResult> EditUser(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            User user = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+
+            return View(user);
+        }
+
+        //Edit user information
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditUser(User user)
+        {
+
+            //Searches for a user id that mathch the given id
+            User currentUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+
+            currentUser.Username = user.Username;
+            currentUser.Password = user.Password.ComputeSha256Hash();
+            currentUser.Role = user.Role;
+            currentUser.Address = user.Address;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Users");
+        }
+
+        //Goes to the page for deleting a user
+        [ActionName("DeleteUserPage")]
+        public IActionResult DeleteUser(int? id)
+        {
+            //Check whether id is 0 and return a not found result if id is 0
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Get the specified user by checking if the given id matches a single Id in the DB
+            User user = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            return View(user);
+        }
+
+        //Confirmation for deleteting specified user
+        public IActionResult DeleteUser(int id)
+        {
+            User user = _context.Users.SingleOrDefault(u => id == u.Id);
+
+            //Remove specified user from the DB
+            _context.Users.Remove(user);
+
+            //Await until DB has saved changes
+            _context.SaveChanges();
+
+            return RedirectToAction("Users");
+        }
+
+        //Goes to the page for product details
+        [HttpGet]
+        public async Task<IActionResult> ProductDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+        //Goes to the page for adding products
+        [ActionName("AddProductPage")]
+        public IActionResult AddProduct()
         {
             return View();
         }
@@ -225,26 +276,9 @@ namespace TheRichLifeProject.Controllers
             return RedirectToAction("Products");
         }
 
-        //Goes to the page for product details
-        [HttpGet]
-        public async Task<IActionResult> ProductDetails(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
-        }
-
-        //Goes the page for editting products
-        public async Task<IActionResult> EditProductPage(int? id)
+        //Goes to the page for editting products
+        [ActionName("EditProductPage")]
+        public async Task<IActionResult> EditProduct(int? id)
         {
             if (id == null)
             {
@@ -277,7 +311,8 @@ namespace TheRichLifeProject.Controllers
             return RedirectToAction("Products");
         }
 
-        //Admin page for deleting a specific product
+        //Goes the page for deleting a specific product
+        [ActionName("DeleteProductPage")]
         public async Task<IActionResult> DeleteProduct(int? id)
         {
             if (id == null)
@@ -285,13 +320,15 @@ namespace TheRichLifeProject.Controllers
                 return NotFound();
             }
 
-            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
+            var product = await GetProductId(id);
+
+            //Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
 
             return View(product);
         }
 
         //Confirm deletion product
-        public async Task<IActionResult> DeleteProductConfirmation(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
 
@@ -302,37 +339,9 @@ namespace TheRichLifeProject.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult AddUserPage()
+        public async Task<Product> GetProductId(int? id)
         {
-            return View();
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult AddUser(User newUser)
-        {
-            newUser = new User
-            {
-                Username = newUser.Username,
-                Name = newUser.Name,
-                SurName = newUser.SurName,
-                Password = newUser.Password.ComputeSha256Hash(),
-                PhoneNumber = newUser.PhoneNumber,
-                Birth = newUser.Birth,
-                Email = newUser.Email,
-                Role = newUser.Role,
-                DateRegistered = DateTime.Now,
-                Adress = newUser.Adress
-            };
-
-            _context.Add(newUser);
-            _context.SaveChanges();
-
-            return RedirectToAction("Users");
-        }
-
-        public Product GetProductId(int? id)
-        {
-            Product productId = _context.Products.SingleOrDefault(p => p.Id == id);
+            Product productId = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
 
             return productId;
         }
