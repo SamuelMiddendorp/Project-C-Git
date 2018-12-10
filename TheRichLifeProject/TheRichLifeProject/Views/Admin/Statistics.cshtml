@@ -48,18 +48,21 @@
 		}
 	});
 	function LoadCategories() {
+
 		$.ajax({
 			type: "GET",
 			url: "GetStats",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {
+				var labels = [];
+				var values = [];
 				for (var i = 0; i < response.length; i++) {
-					alert(response[i].name);
-					myChart.data.labels.push(response[i].name);
-					myChart.data.datasets[0].data.push(response[i].count);
-
+					labels.push(response[i].name)
+					values.push(response[i].count);
 				}
+				myChart.data.labels = labels;
+				myChart.data.datasets[0].data = values;
 				myChart.update();
 			},
 			failure: function (response) {
