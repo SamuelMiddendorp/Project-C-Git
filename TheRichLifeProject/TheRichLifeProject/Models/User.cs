@@ -53,11 +53,13 @@ namespace TheRichLifeProject.Models
         [StringLength(20, MinimumLength = 3)]
         public string City { get; set; }
 
-        [Required, StringLength(7, MinimumLength = 6)]
+        [Required]
+        [StringLength(7, MinimumLength = 6)]
         //[RegularExpression("/^[1 - 9][0 - 9]{3} ? (?!sa|sd|ss)[a-z]{2}$/i")]
         public string Zip { get; set; }
 
         [Required]
+        [StringLength(32, MinimumLength = 7)]
         public string Address { get; set; }
 
         public List<Review> Reviews { get; set; }

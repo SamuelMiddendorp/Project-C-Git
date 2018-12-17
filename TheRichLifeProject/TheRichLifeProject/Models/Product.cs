@@ -19,7 +19,7 @@ namespace TheRichLifeProject.Models
         [Required]
         public string ProductName { get; set; }
 
-        public byte[] ImageSrc { get; set; }
+        public string ImageSrc { get; set; }
 
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }

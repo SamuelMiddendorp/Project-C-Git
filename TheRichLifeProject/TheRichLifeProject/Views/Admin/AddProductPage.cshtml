@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImageSrc" class="control-label"></label>
-                <input asp-for="ImageSrc" class="form-control" type="image" />
+                <input asp-for="ImageSrc" class="form-control" type="text" />
                 <span asp-validation-for="ImageSrc" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,11 +69,11 @@
     <a asp-action="Products">Back to List</a>
 </div>
 
-<form method="post" action="ShowFields" enctype="multipart/form-data">
+<!--<form method="post" action="ShowFields" enctype="multipart/form-data">
     <input type="file" name="pic" /><br />
     <input type="text" name="fullName" /><br />
     <input type="submit" value="Go" />
-</form>
+</form>-->
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -72,17 +72,7 @@ namespace TheRichLifeProject.Controllers
         }
         public IActionResult Register(User newUser)
         {
-            HttpContext.Session.SetString("emptyfield", "0");
-            int p = Int32.Parse(newUser.PhoneNumber);
-            if (p < 0) { 
-                HttpContext.Session.SetString("emptyfield", "1");
-                return RedirectToAction("Registration");
-            }
-            else if(_context.Users.Any(x => x.Username == newUser.Username)){
-                HttpContext.Session.SetString("emptyfield", "2");
-                return RedirectToAction("Registration");
-            }
-
+           
             newUser = new User
             {
                 Username = newUser.Username,

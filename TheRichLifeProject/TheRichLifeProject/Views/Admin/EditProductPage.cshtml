@@ -8,7 +8,7 @@
 
 <h4>Product</h4>
 <hr />
-<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="AddingImage">
+<!--<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="AddingImage">
     <div class="form-group">
         <div class="col-md-10">
             <label asp-for="ImageSrc" class="control-label">Image source</label>
@@ -21,7 +21,7 @@
             <input type="submit" value="Upload" />
         </div>
     </div>
-</form>
+</form>-->
 
 <hr />
 
@@ -45,11 +45,11 @@
                 <input asp-for="LongDescription" class="form-control" type="text" />
                 <span asp-validation-for="LongDescription" class="text-danger"></span>
             </div>
-            <!--<div class="form-group">
+            <div class="form-group">
                 <label asp-for="ImageSrc" class="control-label">Image Source</label>
-                <input asp-for="ImageSrc" class="form-control" type="image" />
+                <input asp-for="ImageSrc" class="form-control" type="text" />
                 <span asp-validation-for="ImageSrc" class="text-danger"></span>
-            </div>-->
+            </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" type="number" />

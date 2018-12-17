@@ -41,6 +41,10 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<int?>("UserId");
 
+                    b.Property<DateTime>("orderDate");
+
+                    b.Property<int>("status");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -77,7 +81,7 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<int>("Category");
 
-                    b.Property<byte[]>("ImageSrc");
+                    b.Property<string>("ImageSrc");
 
                     b.Property<string>("LongDescription");
 
