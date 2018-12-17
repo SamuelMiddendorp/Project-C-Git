@@ -183,7 +183,10 @@ namespace TheRichLifeProject.Controllers
                 Email = newUser.Email,
                 Role = newUser.Role,
                 DateRegistered = DateTime.Now,
-                Address = newUser.Address
+                Province = newUser.Province,
+                City = newUser.City,
+                Address = newUser.Address,
+                Zip = newUser.Zip
             };
 
             _context.Add(newUser);
