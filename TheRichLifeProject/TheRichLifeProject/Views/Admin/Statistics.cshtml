@@ -7,7 +7,9 @@
 </head>
 <h2>Statistics</h2>
 <canvas id="myChart" width="400" height="400"></canvas>
-<button onclick="LoadCategories()">Load categories</button>
+<button onclick="LoadData(0)">Load categories</button>
+<button onclick="LoadData(1)">Load users</button>
+<button onclick="LoadData(2)">Load orders</button>
 <script>
 	var ctx = document.getElementById("myChart");
 	var myChart = new Chart(ctx, {
@@ -47,11 +49,12 @@
 			}
 		}
 	});
-	function LoadCategories() {
+	function LoadData(id) {
 
 		$.ajax({
 			type: "GET",
 			url: "GetStats",
+			data: {dataselector: id},
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {
