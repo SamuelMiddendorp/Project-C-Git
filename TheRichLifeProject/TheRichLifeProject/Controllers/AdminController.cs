@@ -11,21 +11,27 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TheRichLifeProject.Models;
 using TheRichLifeProject.ViewModel;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace TheRichLifeProject.Controllers
 {
-    [Authorize  ]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public AdminController(DatabaseContext context)
+        private readonly IHostingEnvironment he;
+
+        public AdminController(DatabaseContext context, IHostingEnvironment e)
         {
+            he = e;
             _context = context;
         }
 
         //Admin Login
-        
+
         [HttpGet]
         public List<StatisticsViewModel> GetStats()
         {
@@ -35,7 +41,7 @@ namespace TheRichLifeProject.Controllers
                 new StatisticsViewModel(){Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) },
                 new StatisticsViewModel(){Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) }
             };
-                
+
             return (statistics);
         }
         [AllowAnonymous]
@@ -117,7 +123,7 @@ namespace TheRichLifeProject.Controllers
             return View();
         }
 
-        // GET: Admin
+        // Sort by users name or date
         public async Task<IActionResult> Index(string sortOrder)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -308,6 +314,7 @@ namespace TheRichLifeProject.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult EditProduct(Product product)
         {
+
             Product currentProduct = _context.Products.SingleOrDefault(p => p.Id == product.Id);
 
             currentProduct.ProductName = product.ProductName;
@@ -359,5 +366,140 @@ namespace TheRichLifeProject.Controllers
 
             return productId;
         }
+        
+        /*public string AddImage(Product product, IFormFile image)
+        {
+            if (ModelState.IsValid)
+            {
+                if (image != null && image.Length > 0)
+                {
+                    Product imageId = _context.Products.SingleOrDefault(p => p.Id == product.Id);
+                    string fileName = Path.GetFileName(image.FileName);
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\items", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        image.CopyTo(fileStream);
+                    }
+                    product.ImageSrc = fileName;
+                }
+            }
+
+            return product.ImageSrc;
+
+        }*/
+
+        /*public async Task<IActionResult> AddProductImage(EditProduct editProduct)
+        {
+
+            if (ModelState.IsValid)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+
+                    Product product = new Product
+                    {
+                        ProductName = "test",
+                        ShortDescription = "ShortDescription"
+                    };
+
+                    await editProduct.ImageSrc.CopyToAsync(memoryStream);
+                    product.ImageSrc = memoryStream.ToArray();
+
+                }
+            }
+            return View();
+
+
+        }*/
+
+        /*public IActionResult EditProduct()
+        {
+            return View(new EditProduct());
+        }
+
+        /*public IActionResult CreateImage()
+        {
+            return View(new EditProduct());
+        }
+
+        [HttpPost]
+        public IActionResult CreateImage(EditProduct model)
+        {
+            //Sets the file
+            IFormFile image = model.Image;
+            string imageCaption = model.ImageCaption;
+
+            //Get the file meta data
+            string fileName = Path.GetFileName(model.Image.FileName);
+            var contentTtype = model.Image.ContentType;
+
+            return View();
+        }*/
+
+        /*private byte[] GetByteArrayFromImage(IFormFile file)
+        {
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                return target.ToArray();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddAnImage(EditProduct model, IFormFile img)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (img != null && img.Length > 0)
+                {
+                    string fileName = Path.GetFileName(img.FileName);
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        img.CopyTo(stream);
+                    }
+                }
+            }
+            return RedirectToAction("Products");
+        }
+
+        public async Task<IActionResult> AddingImage(int productId, IFormFile image)
+        {
+
+
+            //if (ModelState.IsValid)
+                if (image != null && image.Length > 0)
+                {
+                    byte[] b1 = null;
+                    using (var c1 = image.OpenReadStream())
+                    using (var c2 = new MemoryStream())
+                    {
+                        c1.CopyTo(c2);
+                        b1 = c2.ToArray();
+                    }
+
+                    //product.ImageSrc = b1;
+                }
+
+                //_context.Add(product.ImageSrc);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Products");
+        }
+
+        public IActionResult ShowFields(string fullName, IFormFile pic)
+        {
+            ViewData["fname"] = fullName;
+            if (pic != null)
+            {
+                var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(pic.FileName));
+                pic.CopyTo(new FileStream(fileName, FileMode.Create));
+                ViewData["fileLocation"] = "/"+Path.GetFileName(pic.FileName);
+            }
+
+            return View();
+        }*/
     }
 }

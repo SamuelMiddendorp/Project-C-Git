@@ -77,7 +77,7 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<int>("Category");
 
-                    b.Property<string>("ImageSrc");
+                    b.Property<byte[]>("ImageSrc");
 
                     b.Property<string>("LongDescription");
 
@@ -130,6 +130,10 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<DateTime>("Birth");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<DateTime>("DateRegistered");
 
                     b.Property<string>("Email")
@@ -144,6 +148,8 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<string>("PhoneNumber");
 
+                    b.Property<int>("Province");
+
                     b.Property<int>("Role");
 
                     b.Property<string>("SurName")
@@ -153,6 +159,10 @@ namespace TheRichLifeProject.Migrations
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(16);
+
+                    b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasMaxLength(7);
 
                     b.HasKey("Id");
 

@@ -15,38 +15,53 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Username" class="control-label">Username</label>
-                <input asp-for="Username" class="form-control" type="text" required/>
+                <input asp-for="Username" class="form-control" type="text" required />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
-                <input asp-for="Name" class="form-control" type="text" required/>
+                <input asp-for="Name" class="form-control" type="text" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SurName" class="control-label">SurName</label>
-                <input asp-for="SurName" class="form-control" type="text" required/>
+                <input asp-for="SurName" class="form-control" type="text" required />
                 <span asp-validation-for="SurName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label">Password</label>
-                <input asp-for="Password" class="form-control" type="password" required/>
+                <input asp-for="Password" class="form-control" type="password" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
-                <input asp-for="PhoneNumber" class="form-control" type="tel"/>
+                <input asp-for="PhoneNumber" class="form-control" type="tel" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Email Address</label>
-                <input asp-for="Email" class="form-control" type="email"/>
+                <input asp-for="Email" class="form-control" type="email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label">Address</label>
-                <input asp-for="Address" class="form-control" type="text" required/>
+                <label asp-for="Province" class="control-label"></label>
+                <select asp-for="Province" asp-items="Html.GetEnumSelectList<Province>()" class="form-control" required></select>
+                <span asp-validation-for="Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" type="text" required>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" type="text" required>
                 <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zip" class="control-label"></label>
+                <input asp-for="Zip" class="form-control" type="text" required>
+                <span asp-validation-for="Zip" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

@@ -1,90 +1,78 @@
-﻿
-@{
-	ViewData["Title"] = "Registration";
+﻿@{
+    ViewData["Title"] = "Registration";
+    @model TheRichLifeProject.Models.User
+    { await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
 <h2>Registration</h2>
-<br/>
+<br />
 
 	Please fill in all the required info to create an account
-<br/>
-<br/>
+<br />
+<br />
 
-<form asp-controller="Login" asp-action="Register" method="post">
-    <table>
-        <tr>
-            <td style="padding: 10px;">
-                <label for="username">Username</label>
-            </td>
-            <td>
-                <input id="username" name="username" type="text" required/>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="password">Password</label>
-            </td>
-            <td>
-                <input id="password" name="password" type="password" required/>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="name">Name</label>
-            </td>
-            <td>
-                <input id="name" name="Name" type="text" required/>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="surname">Surname</label>
-            </td>
-            <td>
-                <input id="surname" name="Surname" type="text" required/>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="address">Address</label>
-            </td>
-            <td>
-                <input id="address" name="Address" type="text" required/>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="email">Email</label>
-            </td>
-            <td>
-                <input id="email" name="Email" type="email" required/>
-            </td>
-                
-        </tr>
-
-        <tr>
-            <td style="padding: 10px;">
-                <label for="phonenumber">Phone Number</label>
-            </td>
-            <td>
-                <input id="phonenumber" name="PhoneNumber" type="tel" pattern="^[^a-z]*$" size="20" minlength="10" maxlength="10" required/>
-            </td>
-        </tr>       
-        <tr>
-            <td style="padding: 10px;">
-                <label for="birth">Birth</label>
-            </td>
-            <td>
-                <input id="birth" name="Birth" type="date" required />
-            </td>
-        </tr>
-    </table>
-	<br/>
-	<button  type="submit">Create account</button>
-	<h4 style="color: red;">@ViewBag.emptyfield</h4>
-</form>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Login" asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" type="text" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" type="text" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurName" class="control-label"></label>
+                <input asp-for="SurName" class="form-control" type="text" required />
+                <span asp-validation-for="SurName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" type="tel" required />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birth" class="control-label"></label>
+                <input asp-for="Birth" class="form-control" required />
+                <span asp-validation-for="Birth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province" class="control-label"></label>
+                <select asp-for="Province" asp-items="Html.GetEnumSelectList<Province>()" class="form-control" required></select>
+                <span asp-validation-for="Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" type="text" required>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" type="text" required>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zip" class="control-label"></label>
+                <input asp-for="Zip" class="form-control" type="text" required>
+                <span asp-validation-for="Zip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

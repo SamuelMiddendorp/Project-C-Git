@@ -94,7 +94,10 @@ namespace TheRichLifeProject.Controllers
                 Birth = newUser.Birth,
                 Address = newUser.Address,
                 Role = Role.User,
-                DateRegistered = DateTime.Now           
+                DateRegistered = DateTime.Now,
+                City = newUser.City,
+                Province = newUser.Province,
+                Zip = newUser.Zip,
             };
             _context.Add(newUser);
             _context.SaveChanges();

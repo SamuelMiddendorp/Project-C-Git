@@ -8,6 +8,23 @@
 
 <h4>Product</h4>
 <hr />
+<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="AddingImage">
+    <div class="form-group">
+        <div class="col-md-10">
+            <label asp-for="ImageSrc" class="control-label">Image source</label>
+            <input asp-for="ImageSrc" class="form-control" type="file" multiple/>
+            <span asp-validation-for="ImageSrc" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+</form>
+
+<hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditProduct">
@@ -15,32 +32,32 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="ProductName" class="control-label">Product Name</label>
-                <input asp-for="ProductName" class="form-control" type="text" required/>
+                <input asp-for="ProductName" class="form-control" type="text" required />
                 <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ShortDescription" class="control-label">Short Description</label>
-                <input asp-for="ShortDescription" class="form-control" type="text"/>
+                <input asp-for="ShortDescription" class="form-control" type="text" />
                 <span asp-validation-for="ShortDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LongDescription" class="control-label">Long Description</label>
-                <input asp-for="LongDescription" class="form-control" type="text"/>
+                <input asp-for="LongDescription" class="form-control" type="text" />
                 <span asp-validation-for="LongDescription" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label asp-for="ImageSrc" class="control-label">Image Source</label>
-                <input asp-for="ImageSrc" class="form-control" type="image"/>
+                <input asp-for="ImageSrc" class="form-control" type="image" />
                 <span asp-validation-for="ImageSrc" class="text-danger"></span>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" type="number"/>
+                <input asp-for="Price" class="form-control" type="number" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
-                <input asp-for="Stock" class="form-control" type="number" required/>
+                <input asp-for="Stock" class="form-control" type="number" required />
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,7 +72,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SubCategory" class="control-label">Sub Category</label>
-                <select asp-for="SubCategory" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+                <input asp-for="SubCategory" class="form-control" />
                 <span asp-validation-for="SubCategory" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -11,5 +11,7 @@ namespace TheRichLifeProject.Models
         public User User { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public decimal OrderPrice { get; set; }
+        public DateTime orderDate { get; set; }
+        public Status status { get; set;  }
     }
 }

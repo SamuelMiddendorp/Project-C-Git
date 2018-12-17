@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,9 +19,8 @@ namespace TheRichLifeProject.Models
         [Required]
         public string ProductName { get; set; }
 
-        public string ImageSrc { get; set; }
+        public byte[] ImageSrc { get; set; }
 
-        [DisplayFormat(DataFormatString = "0:€ ", ApplyFormatInEditMode = false)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
