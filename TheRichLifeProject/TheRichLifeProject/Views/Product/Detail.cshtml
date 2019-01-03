@@ -1,7 +1,6 @@
 ﻿@using TheRichLifeProject.Models
-@model TheRichLifeProject.Models.Product
 @{
-    ViewBag.Title = @Model.ProductName;
+    ViewBag.Title = @Model.Product.ProductName;
 }
 <style>
 
@@ -19,54 +18,80 @@
 
 <!--...-->
 <div class="one">
-    <p> </p>
-    <br />
-    <br />
-    <p class="one"></p>
-    <br />
-    <img src="@Model.ImageSrc" alt="foto product" style="width: 50vw;">
-    <p> </p>
-    <br />
+	<p> </p>
+	<br />
+	<br />
+	<p class="one"></p>
+	<br />
+	<img src="@Model.Product.ImageSrc" alt="foto product" style="width: 50vw;">
+	<p> </p>
+	<br />
 
-    <p class="one"></p>
-    <h2>@Model.ProductName</h2>
-    <h3>Price: @Model.Price.ToString("c")</h3>
-    <p></p>
-    <p class="one"></p>
-    <p>@Model.ShortDescription</p>
-    <p>@Model.LongDescription</p>
-    @*<p>Mature product: @Model.Mature</p>*@
-    <p>In Stock: @Model.Stock</p>
+	<p class="one"></p>
+	<h2>@Model.Product.ProductName</h2>
+	<h3>Price: @Model.Product.Price.ToString("c")</h3>
+	<p></p>
+	<p class="one"></p>
+	<p>@Model.Product.ShortDescription</p>
+	<p>@Model.Product.LongDescription</p>
+	@*<p>Mature product: @Model.Mature</p>*@
+	<p>In Stock: @Model.Product.Stock</p>
 
-    <p class="one"></p>
-    <br />
+	<p class="one"></p>
+	<br />
 
-    <div class="OrderItem text-right">
+	<div class="OrderItem text-right">
 
-        <p class="button">
-            <a class="btn btn-success" id="listButton"
-               asp-controller="WishList"
-               asp-action="AddToWishList"
-               asp-route-productId="@Model.Id">
-                Save product
-            </a>
-            <a class="btn btn-success" id="listButton"
-               asp-controller="Order"
-               asp-action="OrderItem"
-               asp-route-productId="@Model.Id">
-                Order Product
-            </a>
-            <a class="btn btn-success" id="listButton"
-               asp-controller="Cart"
-               asp-action="Add"
-               asp-route-productId="@Model.Id">
-                Add to cart
-            </a>
+		<p class="button">
+			<a class="btn btn-success" id="listButton"
+			   asp-controller="WishList"
+			   asp-action="AddToWishList"
+			   asp-route-productId="@Model.Product.Id">
+				Save product
+			</a>
+			<a class="btn btn-success" id="listButton"
+			   asp-controller="Order"
+			   asp-action="OrderItem"
+			   asp-route-productId="@Model.Product.Id">
+				Order Product
+			</a>
+			<a class="btn btn-success" id="listButton"
+			   asp-controller="Cart"
+			   asp-action="Add"
+			   asp-route-productId="@Model.Product.Id">
+				Add to cart
+			</a>
 
-        </p>
-
-
-    </div>
+		</p>
 
 
-</div>
+	</div>
+	<hr />
+	<div id="Reviews">
+		<h2>Reviews</h2>
+		@foreach (var review in Model.Reviews)
+		{
+
+			<h3>@review.Title</h3>
+
+			<h4>Geschreven op @review.PublishDate</h4>
+			<br />
+			@review.Body
+		}
+	</div>
+	<hr/>
+	@if (User.Identity.IsAuthenticated)
+	{
+		<form asp-controller="Product" asp-action="Review" method="post">
+			<input type="hidden" name="productid" value="@Model.Product.Id"/>
+			<label for="title">Title</label>
+			<input id="title" name="title" type="text"/>
+			<br />
+			<br />
+			<textarea cols="120" rows="10" name="body" placeholder="Schrijf kort een review"></textarea>
+			<br />
+			<button type="submit">Verzenden</button>
+		</form>
+	}
+	</div>
+	

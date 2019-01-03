@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheRichLifeProject.interfaces;
 using TheRichLifeProject.Models;
+using TheRichLifeProject.ViewModel;
 using TheRichLifeProject.ViewModels;
 
 namespace TheRichLifeProject.Controllers
@@ -213,22 +216,35 @@ namespace TheRichLifeProject.Controllers
 
         public IActionResult Detail(int id)
         {
+
             var product = _productRepository.GetProductById(id);
-
-            var model = new Product
+            var reviews = _context.Reviews.ToList();
+            var model = new ProductViewModel
             {
-                Id = id,
-                ProductName = product.ProductName,
-                Price = product.Price,
-                ImageSrc = product.ImageSrc,
-                ShortDescription = product.ShortDescription,
-                LongDescription = product.LongDescription,
-                Mature = product.Mature,
-                Stock = product.Stock
-
+                Reviews = reviews,
+                Product = product
             };
 
             return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Review(string title, string body, int productid)
+        {
+            var userId = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            User CurrentUser = _context.Users.Find(Int32.Parse(userId));
+            var product = _context.Products.Find(productid);
+            var review = new Review
+            {
+                Title = title,
+                Body = body,
+                User = CurrentUser,
+                Product = product,
+                PublishDate = DateTime.Now
+            };
+            _context.Add(review);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 
