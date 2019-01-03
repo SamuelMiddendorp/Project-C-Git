@@ -209,4 +209,8 @@
     <None Include="wwwroot\lib\chart.js\test\specs\scale.time.tests.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

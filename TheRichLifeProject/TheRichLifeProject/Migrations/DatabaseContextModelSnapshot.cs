@@ -130,7 +130,8 @@ namespace TheRichLifeProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(32);
 
                     b.Property<DateTime>("Birth");
 
