@@ -146,14 +146,12 @@ namespace TheRichLifeProject.Controllers
         // GET: Admin/Details/5
         public IActionResult UserDetails(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            User user = _context.Users.SingleOrDefault(m => m.Id == id);
+            var user = GetUserId(id);
 
-            if (user == null)
+            //user.RunSynchronously();
+
+            if (id == null && user == null)
             {
                 return NotFound();
             }
@@ -172,27 +170,31 @@ namespace TheRichLifeProject.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddUser(User newUser)
         {
-            newUser = new User
+            if (ModelState.IsValid)
             {
-                Username = newUser.Username,
-                Name = newUser.Name,
-                SurName = newUser.SurName,
-                Password = newUser.Password.ComputeSha256Hash(),
-                PhoneNumber = newUser.PhoneNumber,
-                Birth = newUser.Birth,
-                Email = newUser.Email,
-                Role = newUser.Role,
-                DateRegistered = DateTime.Now,
-                Province = newUser.Province,
-                City = newUser.City,
-                Address = newUser.Address,
-                Zip = newUser.Zip
-            };
+                newUser = new User
+                {
+                    Username = newUser.Username,
+                    Name = newUser.Name,
+                    SurName = newUser.SurName,
+                    Password = newUser.Password.ComputeSha256Hash(),
+                    PhoneNumber = newUser.PhoneNumber,
+                    Birth = newUser.Birth,
+                    Email = newUser.Email,
+                    Role = newUser.Role,
+                    DateRegistered = DateTime.Now,
+                    Province = newUser.Province,
+                    City = newUser.City,
+                    Address = newUser.Address,
+                    Zip = newUser.Zip
+                };
 
-            _context.Add(newUser);
-            _context.SaveChanges();
+                _context.Add(newUser);
+                _context.SaveChanges();
 
-            return RedirectToAction("Users");
+                return RedirectToAction("Users");
+            }
+            return View(newUser);
         }
 
         //Page where the admin can edit the info of a user
@@ -204,32 +206,36 @@ namespace TheRichLifeProject.Controllers
                 return NotFound();
             }
 
-            User user = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            User user = await GetUserId(id);
 
             return View(user);
         }
 
         //Edit user information
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult EditUser(User user)
+        public async Task<IActionResult> EditUser(User user)
         {
+            if (ModelState.IsValid)
+            {
+                //Searches for a user id that mathch the given id
+                User currentUser = await GetUserId(user.Id);
 
-            //Searches for a user id that mathch the given id
-            User currentUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+                currentUser.Username = user.Username;
+                currentUser.Password = user.Password.ComputeSha256Hash();
+                currentUser.Role = user.Role;
+                currentUser.Address = user.Address;
 
-            currentUser.Username = user.Username;
-            currentUser.Password = user.Password.ComputeSha256Hash();
-            currentUser.Role = user.Role;
-            currentUser.Address = user.Address;
+                _context.SaveChanges();
 
-            _context.SaveChanges();
+                return RedirectToAction("Users");
+            }
 
-            return RedirectToAction("Users");
+            return View(user);
         }
 
         //Goes to the page for deleting a user
         [ActionName("DeleteUserPage")]
-        public IActionResult DeleteUser(int? id)
+        public async Task<IActionResult> DeleteUser(int? id)
         {
             //Check whether id is 0 and return a not found result if id is 0
             if (id == null)
@@ -238,15 +244,15 @@ namespace TheRichLifeProject.Controllers
             }
 
             //Get the specified user by checking if the given id matches a single Id in the DB
-            User user = _context.Users.SingleOrDefault(u => u.Id == id);
+            User user = await GetUserId(id);
 
             return View(user);
         }
 
         //Confirmation for deleteting specified user
-        public IActionResult DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            User user = _context.Users.SingleOrDefault(u => id == u.Id);
+            User user = await GetUserId(id);
 
             //Remove specified user from the DB
             _context.Users.Remove(user);
@@ -261,17 +267,14 @@ namespace TheRichLifeProject.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductDetails(int? id)
         {
-            if (id == null)
+
+            Product product = await GetProductId(id);
+
+            if (id == null || product == null)
             {
                 return NotFound();
             }
 
-            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
             return View(product);
         }
 
@@ -286,21 +289,26 @@ namespace TheRichLifeProject.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddProduct(Product newProduct)
         {
-            newProduct = new Product
+            if (ModelState.IsValid)
             {
-                ProductName = newProduct.ProductName,
-                ShortDescription = newProduct.ShortDescription,
-                LongDescription = newProduct.LongDescription,
-                ImageSrc = newProduct.ImageSrc,
-                Price = newProduct.Price,
-                Stock = newProduct.Stock,
-                Mature = newProduct.Mature,
-                Category = newProduct.Category,
-                SubCategory = newProduct.SubCategory
-            };
-            _context.Add(newProduct);
-            _context.SaveChanges();
-            return RedirectToAction("Products");
+                newProduct = new Product
+                {
+                    ProductName = newProduct.ProductName,
+                    ShortDescription = newProduct.ShortDescription,
+                    LongDescription = newProduct.LongDescription,
+                    ImageSrc = newProduct.ImageSrc,
+                    Price = newProduct.Price,
+                    Stock = newProduct.Stock,
+                    Mature = newProduct.Mature,
+                    Category = newProduct.Category,
+                    SubCategory = newProduct.SubCategory
+                };
+                _context.Add(newProduct);
+                _context.SaveChanges();
+                return RedirectToAction("Products");
+            }
+            return View(newProduct);
+            
         }
 
         //Goes to the page for editting products
@@ -312,16 +320,16 @@ namespace TheRichLifeProject.Controllers
                 return NotFound();
             }
 
-            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
+            Product product = await GetProductId(id);
 
             return View(product);
         }
 
         //Editting the product
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult EditProduct(Product product)
+        public async Task<IActionResult> EditProduct(Product product)
         {
-            Product currentProduct = _context.Products.SingleOrDefault(p => p.Id == product.Id);
+            Product currentProduct = await GetProductId(product.Id);
 
             currentProduct.ProductName = product.ProductName;
             currentProduct.ShortDescription = product.ShortDescription;
@@ -357,7 +365,7 @@ namespace TheRichLifeProject.Controllers
         //Confirm deletion product
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
+            Product product = await GetProductId(id);
 
             _context.Products.Remove(product);
 
@@ -366,11 +374,21 @@ namespace TheRichLifeProject.Controllers
             return RedirectToAction("Products");
         }
 
+        //Get product id
         public async Task<Product> GetProductId(int? id)
         {
+
             Product productId = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
 
             return productId;
+        }
+
+        //Get user id
+        public async Task<User> GetUserId(int? id)
+        {
+            User userId = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+
+            return userId;
         }
     }
 }

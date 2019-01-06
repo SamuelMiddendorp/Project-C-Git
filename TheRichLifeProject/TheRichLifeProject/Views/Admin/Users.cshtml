@@ -38,31 +38,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateRegistered)
-            </td>
-            <td>
-                <a asp-action="EditUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
-                <a asp-action="UserDetails" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
-                <a asp-action="DeleteUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRegistered)
+                </td>
+                <td>
+                    <a asp-action="EditUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a asp-action="UserDetails" asp-route-id="@item.Id"><span class="glyphicon glyphicon-book"></span></a>
+                    <a asp-action="DeleteUserPage" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
