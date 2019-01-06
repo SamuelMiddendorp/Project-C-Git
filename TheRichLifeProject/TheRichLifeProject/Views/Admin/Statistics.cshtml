@@ -3,13 +3,15 @@
 	ViewData["Title"] = "Statistics";
 }
 <head>
-<script src="~/lib/chart.js/dist/Chart.js"></script>
+	<script src="~/lib/chart.js/dist/Chart.js"></script>
 </head>
 <h2>Statistics</h2>
-<canvas id="myChart" width="400" height="400"></canvas>
+<canvas id="myChart" width="1000" height="400"></canvas>
 <button onclick="LoadData(0)">Load categories</button>
 <button onclick="LoadData(1)">Load users</button>
 <button onclick="LoadData(2)">Load orders</button>
+<button onclick="LoadData(3)">Load Users</button>
+<button onclick="LoadData(4)">Load Product</button>
 <script>
 	var ctx = document.getElementById("myChart");
 	var myChart = new Chart(ctx, {
@@ -43,7 +45,8 @@
 			scales: {
 				yAxes: [{
 					ticks: {
-						beginAtZero: true
+						beginAtZero: true,
+						type: 'logarithmic'
 					}
 				}]
 			}
@@ -54,7 +57,7 @@
 		$.ajax({
 			type: "GET",
 			url: "GetStats",
-			data: {dataselector: id},
+			data: { dataselector: id },
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {

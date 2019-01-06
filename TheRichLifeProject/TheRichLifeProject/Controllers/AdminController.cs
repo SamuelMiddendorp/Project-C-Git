@@ -43,6 +43,28 @@ namespace TheRichLifeProject.Controllers
                 case 2:
                     statistics.Add(new StatisticsViewModel() { Name = "Orders", Count = _context.Orders.Count() });
                     break;
+                case 3:
+                    foreach(var province in Enum.GetNames(typeof(Province)))
+                    {
+                        Province selected = (Province) Enum.Parse(typeof(Province), province);
+                        statistics.Add(new StatisticsViewModel() { Name = province, Count = _context.Users.Where(x => x.Province == selected).Count() });
+                    }
+                    break;
+                case 4:
+                    List<Product> Products = _context.Products.ToList();
+                    List<StatisticsViewModel> tade = new List<StatisticsViewModel>();
+                    foreach(var product in Products)
+                    {
+                        tade.Add(new StatisticsViewModel() { Name = product.ProductName, Count = _context.OrderDetails.Where(x => x.Product.Id == product.Id).Count() });
+                    }
+                    tade = tade.OrderByDescending(x => x.Count).ToList();
+                    int y= 0;
+                    while (y < 5){
+                        statistics.Add(tade[y]);
+                        y++;
+                    }
+                    
+                    break;
             }
             
 
@@ -148,8 +170,6 @@ namespace TheRichLifeProject.Controllers
         {
 
             var user = GetUserId(id);
-
-            //user.RunSynchronously();
 
             if (id == null && user == null)
             {

@@ -111,6 +111,8 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<string>("Body");
 
+                    b.Property<int?>("ProductId");
+
                     b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("Title");
@@ -119,9 +121,11 @@ namespace TheRichLifeProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("TheRichLifeProject.Models.User", b =>
@@ -130,7 +134,8 @@ namespace TheRichLifeProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(32);
 
                     b.Property<DateTime>("Birth");
 
@@ -229,6 +234,10 @@ namespace TheRichLifeProject.Migrations
 
             modelBuilder.Entity("TheRichLifeProject.Models.Review", b =>
                 {
+                    b.HasOne("TheRichLifeProject.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
                     b.HasOne("TheRichLifeProject.Models.User", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId");
