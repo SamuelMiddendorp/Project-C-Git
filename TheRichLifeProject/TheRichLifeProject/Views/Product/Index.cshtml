@@ -21,15 +21,19 @@
 </style>
 <br />
 <form asp-controller="Product" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchValue">
-        <input type="submit" value="Filter" />
-    </p>
+	<p>
+		Title: <input type="text" name="SearchValue">
+		<br />
+		Lifestyle <input type="radio" name="category" value="Lifestyle" />
+		<br />
+		Exotic <input type="radio" name="category" value="Exotic" />
+		<br />
+		Fashion <input type="radio" name="category" value="Fashion" />
+		<br />
+		<input type="submit" value="Filter" />
+	</p>
 </form>
 <br />
-<li><a asp-area="" asp-controller="Product" asp-action="Lifestyle">Lifestyle</a></li>
-<li><a asp-area="" asp-controller="Product" asp-action="Exotic">Exotic</a></li>
-<li><a asp-area="" asp-controller="Product" asp-action="Fashion">Fashion</a></li>
 
 <br />
 
