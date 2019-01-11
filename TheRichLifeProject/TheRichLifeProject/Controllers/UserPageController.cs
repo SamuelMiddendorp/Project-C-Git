@@ -33,6 +33,8 @@ namespace TheRichLifeProject.Controllers
             CurrentUser.Name = user.Name;
             CurrentUser.SurName = user.SurName;
             CurrentUser.PhoneNumber = user.PhoneNumber;
+            CurrentUser.City = user.City;
+            CurrentUser.Zip = user.Zip;
             CurrentUser.Birth = user.Birth;
             CurrentUser.Email = user.Email;
             _context.SaveChanges();
@@ -49,14 +51,11 @@ namespace TheRichLifeProject.Controllers
             foreach (var item in orders.Where(x => x.User == CurrentUser)){
                 item.OrderDetails = new List<OrderDetail>();
                 foreach (var item2 in orderdetails.Where(x => x.Order == item))
-                {
-                    
+                {       
                     item.OrderDetails.Add(item2);
                 }
                 order.Add(item);
             }
-
-            
             return View(order);
         }
     }

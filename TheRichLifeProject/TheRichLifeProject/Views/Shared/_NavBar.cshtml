@@ -17,13 +17,12 @@
                     <img src="~/images/logo.png" alt="HTML5 Icon" style="width:128px;height:50px; ">
                 </a>
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 <li><a asp-area="" asp-controller="Product" asp-action="Index">All Products</a></li>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a asp-area="" asp-controller="UserPage" asp-action="Orders">My Orders</a></li>
                     <li><a asp-area="" asp-controller="UserPage" asp-action="Index">My Details</a></li>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
                     <li class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,8 +34,6 @@
                             <li class="dropdown-item"><a asp-controller="Admin" asp-action="Statistics">Statistics</a></li>
                         </ul>
                     </li>
-                    <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
-
                 }
                 else
                 {

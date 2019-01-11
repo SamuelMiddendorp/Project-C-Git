@@ -40,8 +40,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Email Address</label>
-                <input asp-for="Email" class="form-control" type="email" />
+                <input asp-for="Email" class="form-control" type="email" placeholder="example@example.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <select asp-for="Role" asp-items="Html.GetEnumSelectList<Role>()" class="form-control" required></select>
+                <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Province" class="control-label"></label>
@@ -68,6 +73,10 @@
             </div>
         </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="UserOrders" asp-controller="Admin" asp-route-id="@Model.Id">See user's order</a>
 </div>
 
 <div>

@@ -15,5 +15,6 @@ namespace TheRichLifeProject.Models
         public Product Product { get; set; }
         public int Quantity { get; set; }
         public decimal SubTotal { get; set; }
+        public Status Status { get; set; }
     }
 }

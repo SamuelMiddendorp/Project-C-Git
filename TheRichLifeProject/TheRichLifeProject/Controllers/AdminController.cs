@@ -76,7 +76,7 @@ namespace TheRichLifeProject.Controllers
 
             return (statistics);
         }
-        [AllowAnonymous]
+        /*[AllowAnonymous]
         public IActionResult Login(string username, string password)
         {
             //Search the user's username (that's been given as a parameter) 
@@ -118,50 +118,39 @@ namespace TheRichLifeProject.Controllers
                 ViewBag.Allowence = "Username and Password do not match";
                 return View();
             }
-
-        }
-
-        //Admin Logout
-        [HttpPost]
-        public IActionResult Logout()
-        {
-            HttpContext.SignOutAsync();
-            return RedirectToAction("Login");
         }
 
         //Admin Dashboard
         public IActionResult Dashboard()
         {
             return View();
-        }
+        }*/
 
         //Admin page with users overview and management
         public IActionResult Users()
         {
             var allUsers = _context.Users.ToList();
-            return View(allUsers);
+            return View("~/Views/Admin/Users/Users.cshtml", allUsers);
         }
 
         //Admin page products overview and management
         public async Task<IActionResult> Products()
         {
             var allProducts = await _context.Products.ToListAsync();
-            return View(allProducts);
+            return View("~/Views/Admin/Products/Products.cshtml", allProducts);
         }
 
-        //TODO: Admin page with statistics about the website
         public IActionResult Statistics()
         {
             return View();
         }
 
-        // GET: Admin
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/Home/Index.cshtml");
         }
 
-        // GET: Admin/Details/5
+        // GET: User details
         public async Task<IActionResult> UserDetails(int? id)
         {
 
@@ -172,20 +161,21 @@ namespace TheRichLifeProject.Controllers
                 return NotFound();
             }
 
-            return View(user);
+            return View("~/Views/Admin/Users/UserDetails.cshtml", user);
         }
 
-        //Goes to the page for adding a user
+        //User page for adding new a new user
         [ActionName("AddUserPage")]
         public IActionResult AddUser()
         {
-            return View();
+            return View("~/Views/Admin/Users/AddUserPage.cshtml");
         }
 
         //Adding a new user
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddUser(User newUser)
         {
+            string viewPath = "~/Views/Admin/Users/AddUserPage.cshtml";
             if (ModelState.IsValid)
             {
                 var usernameExist = _context.Users.Where(x => x.Username == newUser.Username).FirstOrDefault();
@@ -214,14 +204,14 @@ namespace TheRichLifeProject.Controllers
                     _context.Add(newUser);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Users");
+                    return RedirectToAction("~/Views/Admin/Users/Users.cshtml");
                 }
                 else
                 {
-                    return View(newUser);
+                    return View(viewPath, newUser);
                 }
             }
-            return View(newUser);
+            return View(viewPath, newUser);
         }
 
         //Page where the admin can edit the info of a user
@@ -235,7 +225,7 @@ namespace TheRichLifeProject.Controllers
 
             User user = await GetUserId(id);
 
-            return View(user);
+            return View("~/Views/Admin/Users/EditUserPage.cshtml", user);
         }
 
         //Edit user information
@@ -244,20 +234,33 @@ namespace TheRichLifeProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Searches for a user id that mathch the given id
                 User currentUser = await GetUserId(user.Id);
-
                 currentUser.Username = user.Username;
-                currentUser.Password = user.Password.ComputeSha256Hash();
+                if (currentUser.Password == null)
+                {
+                    currentUser.Password = currentUser.Password;
+                }
+                else
+                {
+                    currentUser.Password = user.Password.ComputeSha256Hash();
+                }
+                currentUser.Name = user.Name;
+                currentUser.SurName = user.SurName;
                 currentUser.Role = user.Role;
                 currentUser.Address = user.Address;
+                currentUser.City = user.City;
+                currentUser.Zip = user.Zip;
+                currentUser.Province = user.Province;
+                currentUser.Email = user.Email;
+                currentUser.PhoneNumber = user.PhoneNumber;
+                currentUser.Birth = user.Birth;
 
                 _context.SaveChanges();
 
                 return RedirectToAction("Users");
             }
 
-            return View(user);
+            return View("~/Views/Admin/Users/EditUserPage.cshtml", user);
         }
 
         //Goes to the page for deleting a user
@@ -273,7 +276,7 @@ namespace TheRichLifeProject.Controllers
             //Get the specified user by checking if the given id matches a single Id in the DB
             User user = await GetUserId(id);
 
-            return View(user);
+            return View("~/Views/Admin/Users/DeleteUserPage.cshtml", user);
         }
 
         //Confirmation for deleteting specified user
@@ -294,29 +297,26 @@ namespace TheRichLifeProject.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductDetails(int? id)
         {
-
             Product product = await GetProductId(id);
 
             if (id == null || product == null)
             {
                 return NotFound();
             }
-
-            return View(product);
+            return View("~/Views/Admin/Products/ProductDetails.cshtml", product);
         }
 
         //Goes to the page for adding products
         [ActionName("AddProductPage")]
         public IActionResult AddProduct()
         {
-            return View();
+            return View("~/Views/Admin/Products/AddProductPage.cshtml");
         }
 
         //Adding a new product
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddProduct(Product newProduct)
         {
-
             if (ModelState.IsValid)
             {
                 newProduct = new Product
@@ -335,11 +335,11 @@ namespace TheRichLifeProject.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Products");
             }
-            return View(newProduct);
+            return View("~/Views/Admin/Products/AddProductPage.cshtml", newProduct);
 
         }
 
-        //Goes to the page for editting products
+        //Page for editting products
         [ActionName("EditProductPage")]
         public async Task<IActionResult> EditProduct(int? id)
         {
@@ -350,30 +350,33 @@ namespace TheRichLifeProject.Controllers
 
             Product product = await GetProductId(id);
 
-            return View(product);
+            return View("~/Views/Admin/Products/EditProductPage.cshtml", product);
         }
 
         //Editting the product
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(Product product)
         {
+            if (ModelState.IsValid)
+            {
+                Product currentProduct = await GetProductId(product.Id);
 
+                currentProduct.ProductName = product.ProductName;
+                currentProduct.ShortDescription = product.ShortDescription;
+                currentProduct.LongDescription = product.LongDescription;
+                currentProduct.ImageSrc = product.ImageSrc;
+                currentProduct.Price = product.Price;
+                currentProduct.Stock = product.Stock;
+                currentProduct.Mature = product.Mature;
+                currentProduct.Category = product.Category;
+                currentProduct.SubCategory = product.SubCategory;
 
-            Product currentProduct = await GetProductId(product.Id);
+                _context.SaveChanges();
 
-            currentProduct.ProductName = product.ProductName;
-            currentProduct.ShortDescription = product.ShortDescription;
-            currentProduct.LongDescription = product.LongDescription;
-            currentProduct.ImageSrc = product.ImageSrc;
-            currentProduct.Price = product.Price;
-            currentProduct.Stock = product.Stock;
-            currentProduct.Mature = product.Mature;
-            currentProduct.Category = product.Category;
-            currentProduct.SubCategory = product.SubCategory;
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Products");
+                return RedirectToAction("Products");
+             }
+            return View("~/Views/Admin/Products/AddProductPage.cshtml", product);
+            
         }
 
         //Goes the page for deleting a specific product
@@ -387,7 +390,7 @@ namespace TheRichLifeProject.Controllers
 
             var product = await GetProductId(id);
 
-            return View(product);
+            return View("~/Views/Admin/Products/DeleteProductPage.cshtml", product);
         }
 
         //Confirm deletion product
@@ -400,6 +403,30 @@ namespace TheRichLifeProject.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Products");
+        }
+
+        public IActionResult UserOrders(int id)
+        {
+            var orders = _context.Orders.ToList();
+            var orderdetails = _context.OrderDetails.ToList();
+            var products = _context.Products.ToList();
+            var order = new List<Order>();
+            User user = _context.Users.SingleOrDefault(u => u.Id == id);
+            foreach (var item in orders.Where(x => x.User == user))
+            {
+                item.OrderDetails = new List<OrderDetail>();
+                foreach (var item2 in orderdetails.Where(x => x.Order == item))
+                {
+                    item.OrderDetails.Add(item2);
+                }
+                order.Add(item);
+            }
+            return View("~/Views/Admin/Users/UserOrders.cshtml", order);
+        }
+
+        public IActionResult ChangeStatus()
+        {
+            return View();
         }
 
         //Get product id

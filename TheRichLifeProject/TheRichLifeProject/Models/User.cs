@@ -62,7 +62,7 @@ namespace TheRichLifeProject.Models
 
         [Required, Display(Name = "Street and house number")]
         [StringLength(32, MinimumLength = 7)]
-        [RegularExpression("[\\w-]+\\s+\\d+", ErrorMessage = "Please enter a valid street name and house number")]
+        [RegularExpression("[\\w-]+[\\w-\\s]+\\s+\\d+", ErrorMessage = "Please enter a valid street name and house number")]
         public string Address { get; set; }
 
         public List<Review> Reviews { get; set; }

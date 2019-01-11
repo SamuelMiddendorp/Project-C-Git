@@ -43,8 +43,6 @@ namespace TheRichLifeProject.Migrations
 
                     b.Property<DateTime>("orderDate");
 
-                    b.Property<int>("status");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -62,6 +60,8 @@ namespace TheRichLifeProject.Migrations
                     b.Property<int?>("ProductId");
 
                     b.Property<int>("Quantity");
+
+                    b.Property<int>("Status");
 
                     b.Property<decimal>("SubTotal");
 
