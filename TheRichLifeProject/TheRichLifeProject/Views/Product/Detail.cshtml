@@ -96,11 +96,13 @@
 	}
 	</div>
 	
-<script type="text/javascript">
-    let productName = @Html.Raw(Json.Serialize(Model.Product.ProductName));
-    let productPrice = @Html.Raw(Json.Serialize(Model.Product.Price));
-    let productImage = @Html.Raw(Json.Serialize(Model.Product.ImageSrc));
-    let product = {
+<!--<script type="text/javascript">
+    //Testing Html5 localStorages
+    //let productName = @*@Html.Raw(Json.Serialize(Model.Product.ProductName));
+    //let productPrice = @Html.Raw(Json.Serialize(Model.Product.Price));
+    //let productImage = @Html.Raw(Json.Serialize(Model.Product.ImageSrc));*@
+    //object
+    /*let product = {
         "name": productName,
         "imageSrc": productImage,
         "price": productPrice
@@ -117,9 +119,7 @@
 
     localStorage.setItem("itemsArray", stringObject);
 
-    //let retrievedObject = localStorage.getItem("testObject");
+    let retrievedObject = localStorage.getItem("testObject");
 
-    //console.log(retrievedObject);
-
-
-</script>
+    console.log(retrievedObject);*/
+</script>-->

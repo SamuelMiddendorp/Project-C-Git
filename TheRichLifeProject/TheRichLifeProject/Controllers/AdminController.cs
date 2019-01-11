@@ -11,62 +11,68 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TheRichLifeProject.Models;
 using TheRichLifeProject.ViewModel;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace TheRichLifeProject.Controllers
 {
-    [Authorize  ]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly DatabaseContext _context;
-
-        public AdminController(DatabaseContext context)
+        private readonly IHostingEnvironment hostingEnvironment;
+        public AdminController(DatabaseContext context, IHostingEnvironment environment)
         {
             _context = context;
+            hostingEnvironment = environment;
         }
 
         //Admin Login
 
         [HttpGet]
-        public List<StatisticsViewModel> GetStats(int dataselector) {
+        public List<StatisticsViewModel> GetStats(int dataselector)
+        {
 
             List<StatisticsViewModel> statistics = new List<StatisticsViewModel>();
-            switch (dataselector) {
+            switch (dataselector)
+            {
                 case 0:
-                statistics.Add(new StatisticsViewModel() { Name = "Exotic", Count = _context.Products.Count(x => x.Category == Category.Exotic) });
-                statistics.Add(new StatisticsViewModel() { Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) });
-                statistics.Add(new StatisticsViewModel() { Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) });
+                    statistics.Add(new StatisticsViewModel() { Name = "Exotic", Count = _context.Products.Count(x => x.Category == Category.Exotic) });
+                    statistics.Add(new StatisticsViewModel() { Name = "Lifestyle", Count = _context.Products.Count(x => x.Category == Category.Lifestyle) });
+                    statistics.Add(new StatisticsViewModel() { Name = "Fashion", Count = _context.Products.Count(x => x.Category == Category.Fashion) });
                     break;
                 case 1:
-                statistics.Add(new StatisticsViewModel() { Name = "User", Count = _context.Users.Count(x => x.Role == Role.User) });
-                statistics.Add(new StatisticsViewModel() { Name = "Admin", Count = _context.Users.Count(x => x.Role == Role.Admin) });
+                    statistics.Add(new StatisticsViewModel() { Name = "User", Count = _context.Users.Count(x => x.Role == Role.User) });
+                    statistics.Add(new StatisticsViewModel() { Name = "Admin", Count = _context.Users.Count(x => x.Role == Role.Admin) });
                     break;
                 case 2:
                     statistics.Add(new StatisticsViewModel() { Name = "Orders", Count = _context.Orders.Count() });
                     break;
                 case 3:
-                    foreach(var province in Enum.GetNames(typeof(Province)))
+                    foreach (var province in Enum.GetNames(typeof(Province)))
                     {
-                        Province selected = (Province) Enum.Parse(typeof(Province), province);
+                        Province selected = (Province)Enum.Parse(typeof(Province), province);
                         statistics.Add(new StatisticsViewModel() { Name = province, Count = _context.Users.Where(x => x.Province == selected).Count() });
                     }
                     break;
                 case 4:
                     List<Product> Products = _context.Products.ToList();
                     List<StatisticsViewModel> tade = new List<StatisticsViewModel>();
-                    foreach(var product in Products)
+                    foreach (var product in Products)
                     {
                         tade.Add(new StatisticsViewModel() { Name = product.ProductName, Count = _context.OrderDetails.Where(x => x.Product.Id == product.Id).Count() });
                     }
                     tade = tade.OrderByDescending(x => x.Count).ToList();
-                    int y= 0;
-                    while (y < 5){
+                    int y = 0;
+                    while (y < 5)
+                    {
                         statistics.Add(tade[y]);
                         y++;
                     }
-                    
+
                     break;
             }
-            
+
 
             return (statistics);
         }
@@ -150,26 +156,16 @@ namespace TheRichLifeProject.Controllers
         }
 
         // GET: Admin
-        public async Task<IActionResult> Index(string sortOrder)
+        public IActionResult Index()
         {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date-desc" : "Date";
-            var users = from u in _context.Users select u;
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    users = users.OrderByDescending(s => s.Username);
-                    break;
-
-            }
-            return View(await _context.Users.ToListAsync());
+            return View();
         }
 
         // GET: Admin/Details/5
-        public IActionResult UserDetails(int? id)
+        public async Task<IActionResult> UserDetails(int? id)
         {
 
-            var user = GetUserId(id);
+            var user = await GetUserId(id);
 
             if (id == null && user == null)
             {
@@ -192,6 +188,9 @@ namespace TheRichLifeProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var usernameExist = _context.Users.Where(x => x.Username == newUser.Username).FirstOrDefault();
+                var emailExist = _context.Users.Where(x => x.Email == newUser.Email).FirstOrDefault();
+
                 newUser = new User
                 {
                     Username = newUser.Username,
@@ -209,10 +208,18 @@ namespace TheRichLifeProject.Controllers
                     Zip = newUser.Zip
                 };
 
-                _context.Add(newUser);
-                _context.SaveChanges();
+                if (usernameExist == null && emailExist == null)
+                {
 
-                return RedirectToAction("Users");
+                    _context.Add(newUser);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Users");
+                }
+                else
+                {
+                    return View(newUser);
+                }
             }
             return View(newUser);
         }
@@ -309,6 +316,7 @@ namespace TheRichLifeProject.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult AddProduct(Product newProduct)
         {
+
             if (ModelState.IsValid)
             {
                 newProduct = new Product
@@ -328,7 +336,7 @@ namespace TheRichLifeProject.Controllers
                 return RedirectToAction("Products");
             }
             return View(newProduct);
-            
+
         }
 
         //Goes to the page for editting products
@@ -349,6 +357,8 @@ namespace TheRichLifeProject.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(Product product)
         {
+
+
             Product currentProduct = await GetProductId(product.Id);
 
             currentProduct.ProductName = product.ProductName;
@@ -377,8 +387,6 @@ namespace TheRichLifeProject.Controllers
 
             var product = await GetProductId(id);
 
-            //Product product = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
-
             return View(product);
         }
 
@@ -397,17 +405,16 @@ namespace TheRichLifeProject.Controllers
         //Get product id
         public async Task<Product> GetProductId(int? id)
         {
-
+            //Get product by searching the DB for UserId matching the Id given as argument
             Product productId = await _context.Products.SingleOrDefaultAsync(p => p.Id == id);
-
             return productId;
         }
 
         //Get user id
         public async Task<User> GetUserId(int? id)
         {
+            //Get user by searching the DB for UserId matching the Id given as argument
             User userId = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
-
             return userId;
         }
     }

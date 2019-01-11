@@ -22,8 +22,10 @@ namespace TheRichLifeProject.Models
         public string ImageSrc { get; set; }
 
         [DataType(DataType.Currency)]
+        [Range(0.1, 99999999.99)]
         public decimal Price { get; set; }
 
+        [Range(0, 9999999)]
         public int Stock { get; set; }
 
         [Required]
@@ -33,6 +35,7 @@ namespace TheRichLifeProject.Models
         public Category Category { get; set; }
 
         [Required]
+        [RegularExpression("[a-zA-Z]+", ErrorMessage = "Subcategory can only contains letters")]
         public string SubCategory { get; set; }
 
         public virtual List<Value> Values { get; set; }

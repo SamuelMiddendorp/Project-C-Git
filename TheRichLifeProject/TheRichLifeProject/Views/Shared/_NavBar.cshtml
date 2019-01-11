@@ -9,43 +9,57 @@
             </button>
 
         </div>
-        
-        
+
+
         <div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<a href="/">
-					<img src="~/images/logo.png" alt="HTML5 Icon" style="width:128px;height:50px; ">
-				</a>
-				<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-				<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-				<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-				<li><a asp-area="" asp-controller="Product" asp-action="Index">All Products</a></li>
-				@if (User.Identity.IsAuthenticated)
+            <ul class="nav navbar-nav">
+                <a href="/">
+                    <img src="~/images/logo.png" alt="HTML5 Icon" style="width:128px;height:50px; ">
+                </a>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <li><a asp-area="" asp-controller="Product" asp-action="Index">All Products</a></li>
+                @if (User.Identity.IsAuthenticated)
                 {
-					<li><a asp-area="" asp-controller="UserPage" asp-action="Orders">My Orders</a></li>
-					<li><a asp-area="" asp-controller="UserPage" asp-action="Index">My Details</a></li>
-					<li><a asp-area="" asp-controller="Admin" asp-action="Statistics">Statistics</a></li>
+                    <li><a asp-area="" asp-controller="UserPage" asp-action="Orders">My Orders</a></li>
+                    <li><a asp-area="" asp-controller="UserPage" asp-action="Index">My Details</a></li>
+                    <li class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="Admin">
+                            <li class="dropdown-item"><a asp-controller="Admin" asp-action="Users">Users</a></li>
+                            <li class="dropdown-item"><a asp-controller="Admin" asp-action="Products">Products</a></li>
+                            <li class="dropdown-item"><a asp-controller="Admin" asp-action="Statistics">Statistics</a></li>
+                        </ul>
+                    </li>
                     <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
 
                 }
                 else
                 {
-				    <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
                 }
-				<li>
-					<a href="/WishList">
-						<span class="glyphicon glyphicon-heart"></span>
+                <li>
+                    <a href="/WishList">
+                        <span class="glyphicon glyphicon-heart"></span>
 
-					</a>
-				</li>
-				<li>
-					<a href="/Cart">
-						<span class="glyphicon glyphicon-shopping-cart"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Cart">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
 
-					</a>
-				</li>
+                    </a>
+                </li>
 
-			</ul>
+            </ul>
         </div>
     </div>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

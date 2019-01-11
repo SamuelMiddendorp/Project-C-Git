@@ -156,7 +156,7 @@ namespace TheRichLifeProject.Migrations
                         .IsRequired();
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(20);
+                        .HasMaxLength(10);
 
                     b.Property<int>("Province");
 

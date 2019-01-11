@@ -35,12 +35,6 @@
             @Html.DisplayFor(m => m.ProductName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(m => m.ImageSrc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(m => m.ImageSrc)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(m => m.Price)
         </dt>
         <dd>
@@ -73,6 +67,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="EditProductPage" asp-controller="Administrator">Edit</a>
+    <a asp-action="EditProductPage" asp-route-id="@Model.Id">Edit</a>
     <a asp-action="Products" asp-controller="Admin">Back to List</a>
 </div>
