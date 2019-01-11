@@ -21,13 +21,17 @@
 				<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
 				<li><a asp-area="" asp-controller="Product" asp-action="Index">All Products</a></li>
 				@if (User.Identity.IsAuthenticated)
-				{
+                {
 					<li><a asp-area="" asp-controller="UserPage" asp-action="Orders">My Orders</a></li>
 					<li><a asp-area="" asp-controller="UserPage" asp-action="Index">My Details</a></li>
 					<li><a asp-area="" asp-controller="Admin" asp-action="Statistics">Statistics</a></li>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
 
-				}
-				<li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                }
+                else
+                {
+				    <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                }
 				<li>
 					<a href="/WishList">
 						<span class="glyphicon glyphicon-heart"></span>

@@ -155,7 +155,8 @@ namespace TheRichLifeProject.Migrations
                     b.Property<string>("Password")
                         .IsRequired();
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Province");
 

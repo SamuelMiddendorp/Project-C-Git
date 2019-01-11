@@ -10,34 +10,27 @@ namespace TheRichLifeProject.Models
     {
         public int Id { get; set; }
 
-        [Required, StringLength(16, MinimumLength = 2)]
+        [Required(ErrorMessage = "Username is required"), StringLength(16, MinimumLength = 2, 
+            ErrorMessage = "Username must be at least 2 characters and at max 16 characters long")]
         public string Username { get; set; }
 
-        [Required, StringLength(16, MinimumLength = 2)]
+        [Required(ErrorMessage = "Name is required"), StringLength(16, MinimumLength = 2, 
+            ErrorMessage = "Name must be at least 2 characters and at max 16 characters long")]
         public string Name { get; set; }
 
-        [Required, StringLength(16, MinimumLength = 2)]
+        [Required(ErrorMessage = "Sur Name is required"), StringLength(16, MinimumLength = 2,
+            ErrorMessage = "Surname must at least 2 characters and at max 16 characters long")]
         [Display(Name="Sur Name")]
         public string SurName { get; set; }
 
-        //TODO: Add Regex
         [Required, DataType(DataType.Password)]
-        //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$")]
-        [RegularExpression("^(?=.*[a-z])")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$",
+            ErrorMessage = "Please make sure your password contains at least: 1 capital and non-captital letter, " +
+            "a digit, a special character and needs to be a 8 characters long at least")]
         public string Password { get; set; }
 
-        //TODO: Add Regex
-        [Display(Name="Phone Number")]
-        [StringLength(11, MinimumLength = 10)]
-        //Regular expression for checking dutch phone numbers
-        //[RegularExpression(@"^\+[0 - 9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0 - 9]{9}$|[0-9\-\s]{10}$")]
-        //[RegularExpression("^[0 - 9] *$")]
-        //[RegularExpression("(+?\\d{10,11})")]
-        
-        // 0651712452
-        // 07021456385 0705423541
-        // +31654247216 
-        [DataType(DataType.PhoneNumber)]
+        [DataType(DataType.PhoneNumber), Display(Name="Phone Number"), StringLength(10, MinimumLength = 10)]
+        [RegularExpression("06\\d{8}", ErrorMessage = "Please make sure to enter a valid phonenumber starting with 06")]
         public string PhoneNumber { get; set; }   
         
         [Required, Display(Name = "Date of Birth")]
@@ -45,18 +38,10 @@ namespace TheRichLifeProject.Models
         [DataType(DataType.Date)]
         public DateTime Birth { get; set; }
 
-        //TODO: Add Regex
-        [Required, Display(Name="Email Address")]
-        [RegularExpression("[\\w_.+-]+@[\\w-]+\\.[\\w.]+")]
-        [DataType(DataType.EmailAddress)]
-        // test@test.com
-        // test#test.com
-        // test34@gmail.nl
-        // test@hotmil.com.nl
-        // test.test@gmail.com.com
-
-        //TODO: Add Regex
+        [Required, Display(Name="Email Address"), DataType(DataType.EmailAddress)]
+        [RegularExpression("[\\w_.+-]+@[\\w-]+\\.[\\w.]+", ErrorMessage = "Please enter a valid Email Address")]
         public string Email { get; set; }
+
         [Required]
         public Role Role { get; set; } 
 
@@ -66,28 +51,18 @@ namespace TheRichLifeProject.Models
         [Required]
         public Province Province { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "City is required")]
         [StringLength(20, MinimumLength = 3)]
         public string City { get; set; }
 
-        [Required]
-        [StringLength(7, MinimumLength = 6)]
-        [RegularExpression("\\d{4}\\s?[a-zA-Z]{2}")]
-        // 2254 JE
-        // 4523BD
-        // 4523 JD
-        // 6241BD
-        // 45123ND
+        [Required(ErrorMessage = "Zip is required")]
+        [StringLength(7, MinimumLength = 6, ErrorMessage = "Please enter a valid zip")]
+        [RegularExpression("\\d{4}\\s?[a-zA-Z]{2}", ErrorMessage = "Please enter a valid zip")]
         public string Zip { get; set; }
 
-        [Required]
-        [Display(Name = "Address and address number")]
+        [Required, Display(Name = "Street and house number")]
         [StringLength(32, MinimumLength = 7)]
-        [RegularExpression("[\\w-]+")]
-        // jfiefoew 33
-        // jdlsdad33
-        // jsdiowwo 22
-        // st-stuart laan 34
+        [RegularExpression("[\\w-]+\\s+\\d", ErrorMessage = "Please enter a valid street name and house number")]
         public string Address { get; set; }
 
         public List<Review> Reviews { get; set; }

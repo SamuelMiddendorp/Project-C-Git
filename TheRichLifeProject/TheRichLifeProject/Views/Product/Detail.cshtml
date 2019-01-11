@@ -1,4 +1,5 @@
 ﻿@using TheRichLifeProject.Models
+
 @{
     ViewBag.Title = @Model.Product.ProductName;
 }
@@ -95,3 +96,30 @@
 	}
 	</div>
 	
+<script type="text/javascript">
+    let productName = @Html.Raw(Json.Serialize(Model.Product.ProductName));
+    let productPrice = @Html.Raw(Json.Serialize(Model.Product.Price));
+    let productImage = @Html.Raw(Json.Serialize(Model.Product.ImageSrc));
+    let product = {
+        "name": productName,
+        "imageSrc": productImage,
+        "price": productPrice
+    };
+
+    let products = JSON.parse(localStorage.getItem("itemsArray")) || [];
+    products.push(product)
+
+    console.log(product);
+
+    let stringObject = JSON.stringify(products);
+
+    console.log(stringObject);
+
+    localStorage.setItem("itemsArray", stringObject);
+
+    //let retrievedObject = localStorage.getItem("testObject");
+
+    //console.log(retrievedObject);
+
+
+</script>
