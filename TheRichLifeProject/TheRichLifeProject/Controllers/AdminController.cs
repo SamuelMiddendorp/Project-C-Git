@@ -204,7 +204,7 @@ namespace TheRichLifeProject.Controllers
                     _context.Add(newUser);
                     _context.SaveChanges();
 
-                    return RedirectToAction("~/Views/Admin/Users/Users.cshtml");
+                    return RedirectToAction("Users");
                 }
                 else
                 {
